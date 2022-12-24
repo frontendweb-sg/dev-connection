@@ -66,3 +66,13 @@ $navbar-bg: $primary;
 $navbar-bg-light: $white;
 $navbar-height: 65px;
 $navbar-shadow: 0 0 10px $gray-800;
+
+
+// image
+$image-sizes:(
+  "xs":30px,
+  "sm":40px,
+  "md":50px,
+  "lg":80px,
+  "xl":100px
+) !default;

@@ -1,0 +1,34 @@
+.post {
+  padding: 15px;
+  background-color: $white;
+  box-shadow: 0 0 5px $gray-300, -2px 2px 2px $gray-300;
+  border-radius: 8px;
+
+  &-image {
+    overflow: hidden;
+    margin-bottom: 20px;
+    border-radius: inherit;
+    max-height: 300px;
+    position: relative;
+
+    &:before {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 100%;
+      transition: all 500ms linear;
+      background-color: rgba($black, 0.5);
+    }
+
+    img {
+      border-radius: inherit;
+      transition: transform 500ms linear;
+    }
+
+    &:hover {
+      img {
+        transform: scale(1.2);
+      }
+    }
+  }
+}

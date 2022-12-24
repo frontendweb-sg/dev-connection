@@ -1,0 +1,11 @@
+.avatar{
+  border-radius: 50px; 
+  border:2px solid $gray-300;
+  @each $k,$v in $image-sizes{
+    &-#{$k}{
+      width:$v;
+      height:$v;
+      img{max-width: 100%;}
+    }
+  }
+}

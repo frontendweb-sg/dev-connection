@@ -6,7 +6,21 @@
 
   transition: all 300ms linear;
   height: var(--height);
-  &-auth{
-    
+
+  &-private{
+    border-bottom: 1px solid $gray-200;
+  }
+
+  &-center{
+    position: absolute;
+    left:0;
+    right:0;
+    .navbar-nav{
+      align-items: center;
+      justify-content: center;
+      li{
+        margin:0 15px
+      }
+    }
   }
 }

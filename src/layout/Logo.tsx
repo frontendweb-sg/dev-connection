@@ -19,4 +19,8 @@ const Logo: FC<ILogoProps> = ({ to, children, className, ...rest }) => {
   );
 };
 
+Logo.defaultProps = {
+  children: "DC",
+};
+
 export default Logo;

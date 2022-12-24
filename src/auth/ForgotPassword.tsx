@@ -2,7 +2,6 @@ import Box from "../components/Box";
 import Form from "../components/Form";
 import Input from "../components/Input";
 import Typography from "../components/Typegraphy";
-import Password from "../components/Password";
 import Button from "../components/Button";
 import * as yup from "yup";
 import { useFormik } from "formik";

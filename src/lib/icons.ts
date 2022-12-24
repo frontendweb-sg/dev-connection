@@ -5,6 +5,24 @@ import {
   faEyeSlash,
   faKey,
   faHome,
+  faCaretDown,
+  faCaretUp,
+  faFeed,
+  faPeopleGroup,
+  faUsers,
+  faHeart,
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faKey, faHome, faEnvelope, faEye, faEyeSlash);
+library.add(
+  faKey,
+  faHome,
+  faEnvelope,
+  faEye,
+  faEyeSlash,
+  faCaretDown,
+  faCaretUp,
+  faFeed,
+  faPeopleGroup,
+  faUsers,
+  faHeart
+);

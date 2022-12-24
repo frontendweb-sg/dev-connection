@@ -15,7 +15,10 @@ const ForgotPassword = lazy(() => import("../auth/ForgotPassword"));
 // admin
 const Admin = lazy(() => import("../admin"));
 const Dashboard = lazy(() => import("../admin/Dashboard"));
+
+// users
 const Users = lazy(() => import("../admin/Users"));
+const UserDashboard = lazy(() => import("../user/Dashboard"));
 
 const User = lazy(() => import("../user"));
 
@@ -46,7 +49,9 @@ const Routers = () => {
         </Route>
 
         {/* User */}
-        <Route path="user" element={<User />} />
+        <Route path="user" element={<User />}>
+          <Route index element={<UserDashboard />} />
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

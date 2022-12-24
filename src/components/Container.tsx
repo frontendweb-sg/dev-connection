@@ -22,7 +22,7 @@ const Container: FC<IProps> = ({
     fluid ? "container-fluid" : "container",
     className
   );
-  console.log(rest);
+
   return (
     <div className={classes} {...rest}>
       {children}
