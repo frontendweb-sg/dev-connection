@@ -1,0 +1,21 @@
+.form-control{
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  > input{
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 12px 5px;
+    background-color: transparent;
+    &:focus {
+      background-color: transparent;
+    }
+  }
+  &:hover{
+    border-color: $primary;
+  }
+   &:focus-within {
+    background-color: $gray-100;
+  }
+}
