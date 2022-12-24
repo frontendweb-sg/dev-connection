@@ -2,7 +2,10 @@
 @import "bootstrap/scss/bootstrap.scss";
 
 
+@import "./styles/base/init";
 @import "./styles/layout/wrapper";
+@import "./styles/layout/navbar";
+@import "./styles/layout/logo";
 @import "./styles/layout/footer";
 
 @import "./styles/pages/auth";

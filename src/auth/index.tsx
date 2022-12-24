@@ -17,15 +17,15 @@ const Auth = () => {
       <Header />
       <Container className="d-flex flex-column" fluid>
         <Row className="d-flex flex-fill h-100">
-          <Col className="bg-light d-flex align-items-center justify-content-center">
+          <Col className="bg-primary d-flex align-items-center justify-content-center">
             <img
               className="img-responsive"
-              width="700"
+              width="450"
               src="social.png"
               alt=""
             />
           </Col>
-          <Col>
+          <Col className="d-flex align-items-center justify-content-center">
             <Outlet />
           </Col>
         </Row>

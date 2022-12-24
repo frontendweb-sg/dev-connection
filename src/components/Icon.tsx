@@ -13,4 +13,8 @@ const Icon: FC<IProps> = ({ icon, ...rest }) => {
   return <FontAwesomeIcon icon={icon} {...rest} />;
 };
 
+Icon.defaultProps = {
+  icon: "home",
+};
+
 export default Icon;

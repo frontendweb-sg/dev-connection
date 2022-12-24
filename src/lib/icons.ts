@@ -1,11 +1,10 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
-  faCheckSquare,
-  faCoffee,
   faEnvelope,
   faEye,
   faEyeSlash,
   faKey,
+  faHome,
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faCheckSquare, faKey, faEnvelope, faCoffee, faEye, faEyeSlash);
+library.add(faKey, faHome, faEnvelope, faEye, faEyeSlash);
