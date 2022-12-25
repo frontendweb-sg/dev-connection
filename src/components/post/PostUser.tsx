@@ -7,6 +7,7 @@ import Typography from "../Typegraphy";
 import { MomentProps } from "react-moment";
 import Dropdown from "../Dropdown";
 import NavMenu from "../NavMenu";
+import Divider from "../Divider";
 
 /**
  * Post user component
@@ -47,14 +48,11 @@ const PostUser: FC<IPostUser> = ({
           )}
         </Typography>
       </Box>
-      <Dropdown
-        dropdownBodyProps={{
-          direction: "right",
-        }}
-      >
-        <NavMenu to="/post/edit">Edit</NavMenu>
-        <NavMenu to="/post/edit">Edit</NavMenu>
-        <NavMenu to="/post/edit">Edit</NavMenu>
+      <Dropdown dropdownBodyProps={{ direction: "right" }}>
+        <Dropdown.Item icon="edit">Edit</Dropdown.Item>
+        <Dropdown.Item icon="eye">Inactive</Dropdown.Item>
+        <Divider />
+        <Dropdown.Item icon="trash">Delete</Dropdown.Item>
       </Dropdown>
     </Box>
   );

@@ -6,6 +6,8 @@ import { useToggle } from "../hooks/useToggle";
 import Button from "./Button";
 import IconButton from "./IconButton";
 import { Direction } from "../types";
+import { Link, To } from "react-router-dom";
+import Icon from "./Icon";
 
 interface IDropdownContext {
   open: Boolean;
@@ -90,8 +92,36 @@ const DropdownButton: FC<IDropdownButtonProps> = ({ icon, label, ...rest }) => {
   );
 };
 
-const DropdownItem = () => {
-  return <Box></Box>;
+interface IDropdonwItemProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement | HTMLLIElement> {
+  link?: boolean;
+  to?: To;
+  icon?: IconName;
+}
+/**
+ * Dropdown item
+ * @param param0
+ * @returns
+ */
+const DropdownItem: FC<IDropdonwItemProps> = ({
+  link,
+  to,
+  children,
+  className,
+  icon,
+  ...rest
+}) => {
+  const classes = classNames("dropdown-item", className);
+  return link ? (
+    <Link to={to!} className={classes} {...rest}>
+      {icon && <Icon icon={icon} />} {children}
+    </Link>
+  ) : (
+    <Box className={classes}>
+      {icon && <Icon icon={icon} />}
+      {children}
+    </Box>
+  );
 };
 
-export default Object.assign(Dropdown, { DropdownButton, DropdownItem });
+export default Object.assign(Dropdown, { DropdownButton, Item: DropdownItem });
