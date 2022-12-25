@@ -1,4 +1,5 @@
 import { IconName } from "@fortawesome/free-solid-svg-icons";
+import classNames from "classnames";
 import { FC } from "react";
 import { Color, Size } from "../types";
 import Icon from "./Icon";
@@ -20,12 +21,13 @@ const IconButton: FC<IIconButtonProps> = ({
   size,
   icon,
   children,
+  className,
   ...rest
 }) => {
+  const classes = classNames("btn btn-icon", className);
   return (
-    <button {...rest}>
-      <Icon icon={icon!} className="ms-2" />
-      {children}
+    <button className={classes} {...rest}>
+      <Icon icon={icon!} />
     </button>
   );
 };

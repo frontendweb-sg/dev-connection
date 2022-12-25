@@ -11,6 +11,8 @@ import {
   faPeopleGroup,
   faUsers,
   faHeart,
+  faEllipsisH,
+  faEllipsisV,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -24,5 +26,7 @@ library.add(
   faFeed,
   faPeopleGroup,
   faUsers,
-  faHeart
+  faHeart,
+  faEllipsisH,
+  faEllipsisV
 );

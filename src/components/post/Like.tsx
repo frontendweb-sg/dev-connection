@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Box from "../Box";
-import IconButton from "../IconButton";
+import Button from "../Button";
 
 /**
  *
@@ -13,8 +13,12 @@ interface ILikeProps {
 const Like: FC<ILikeProps> = ({ like, dislike }) => {
   return (
     <Box className="post-like">
-      <IconButton icon="heart">{like} likes</IconButton>
-      <IconButton icon="heart">{dislike} dislikes</IconButton>
+      <Button variant="text" startIcon="heart">
+        0 Liked
+      </Button>
+      <Button variant="text" startIcon="heart">
+        {dislike} dislikes
+      </Button>
     </Box>
   );
 };

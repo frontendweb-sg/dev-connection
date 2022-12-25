@@ -5,6 +5,8 @@ import Box from "../Box";
 import DateTime from "../DateTime";
 import Typography from "../Typegraphy";
 import { MomentProps } from "react-moment";
+import Dropdown from "../Dropdown";
+import NavMenu from "../NavMenu";
 
 /**
  * Post user component
@@ -27,7 +29,10 @@ const PostUser: FC<IPostUser> = ({
   date,
   ...rest
 }) => {
-  const classes = classNames("post-user", className);
+  const classes = classNames(
+    "post-user d-flex  justify-content-between ",
+    className
+  );
   return (
     <Box className={classes} {...rest}>
       <Box className="d-flex align-items-center">
@@ -42,6 +47,15 @@ const PostUser: FC<IPostUser> = ({
           )}
         </Typography>
       </Box>
+      <Dropdown
+        dropdownBodyProps={{
+          direction: "right",
+        }}
+      >
+        <NavMenu to="/post/edit">Edit</NavMenu>
+        <NavMenu to="/post/edit">Edit</NavMenu>
+        <NavMenu to="/post/edit">Edit</NavMenu>
+      </Dropdown>
     </Box>
   );
 };

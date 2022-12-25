@@ -1,6 +1,8 @@
 import { FC } from "react";
 import { IPost } from "../../services/post.services";
 import Box from "../Box";
+import Comment from "./Comment";
+import CommentList from "./CommentList";
 import Like from "./Like";
 import PostUser from "./PostUser";
 
@@ -20,6 +22,9 @@ const Post: FC<IPostProps> = ({ post }) => {
         <img src="/post-1.jpg" alt="" />
       </Box>
       <Like />
+      <Comment />
+
+      <CommentList />
     </Box>
   );
 };

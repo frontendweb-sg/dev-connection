@@ -1,6 +1,7 @@
 type TFlex = "flex" | "flex-inline";
-type Direction = "column" | "row";
+type FlexDirection = "column" | "row";
 
+export type Direction = "left" | "right" | "center";
 export type Align = "left" | "right" | "center" | "justify";
 export type Theme = "light" | "dark";
 export type Size = "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "block";
@@ -17,5 +18,5 @@ export type Color =
   | "gray";
 export interface IProps {
   flex: TFlex;
-  direction: Direction;
+  direction: FlexDirection;
 }

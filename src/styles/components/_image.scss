@@ -3,8 +3,9 @@
   border:2px solid $gray-300;
   @each $k,$v in $image-sizes{
     &-#{$k}{
-      width:$v;
-      height:$v;
+      min-width:$v;
+      min-height:$v;
+      max-width: $v;
       img{max-width: 100%;}
     }
   }
