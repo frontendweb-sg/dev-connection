@@ -15,6 +15,7 @@ import {
   faEllipsisV,
   faEdit,
   faTrash,
+  faShare,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -32,5 +33,6 @@ library.add(
   faEllipsisH,
   faEllipsisV,
   faEdit,
-  faTrash
+  faTrash,
+  faShare
 );

@@ -1,13 +1,13 @@
 import { FC } from "react";
 import classNames from "classnames";
-interface IProps extends React.HtmlHTMLAttributes<HTMLDivElement> {}
+export interface IBoxProps extends React.HtmlHTMLAttributes<HTMLDivElement> {}
 
 /**
  * Box component
  * @param param0
  * @returns
  */
-const Box: FC<IProps> = ({ children, className, ...rest }) => {
+const Box: FC<IBoxProps> = ({ children, className, ...rest }) => {
   const classes = classNames(className);
   return (
     <div className={classes} {...rest}>

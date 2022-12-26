@@ -1,49 +1,46 @@
 import classNames from "classnames";
 import { FC } from "react";
+import { MomentProps } from "react-moment";
 import Avatar, { IAvatarProps } from "../Avatar";
 import Box from "../Box";
 import DateTime from "../DateTime";
 import Typography from "../Typegraphy";
-import { MomentProps } from "react-moment";
 import Dropdown from "../Dropdown";
-import NavMenu from "../NavMenu";
 import Divider from "../Divider";
+import { AppProps } from "../../types";
 
 /**
  * Post user component
  * @returns
  */
-interface IPostUser extends React.HTMLAttributes<HTMLElement> {
+interface IPostUser extends AppProps {
   avatar?: string;
   avatarProps?: IAvatarProps;
   name: string;
-  profile?: string;
+  designation?: string;
   date?: MomentProps;
 }
 
 const PostUser: FC<IPostUser> = ({
   avatar,
   name,
-  profile,
+  designation,
   avatarProps,
   className,
   date,
   ...rest
 }) => {
-  const classes = classNames(
-    "post-user d-flex  justify-content-between ",
-    className
-  );
+  const classes = classNames("post-row justify-content-between", className);
   return (
     <Box className={classes} {...rest}>
       <Box className="d-flex align-items-center">
-        <Avatar {...avatarProps} />
+        <Avatar size="sm" {...avatarProps} />
         <Typography className="mb-0 ms-2" variant="subtitle2">
           {name}
           <DateTime className="ms-2 dots" {...date} />
-          {profile && (
+          {designation && (
             <Typography variant="span" className="mb-0 d-block">
-              {profile}
+              {designation}
             </Typography>
           )}
         </Typography>

@@ -1,6 +1,7 @@
+import { ReactElement, ReactNode } from "react";
+
 type TFlex = "flex" | "flex-inline";
 type FlexDirection = "column" | "row";
-
 export type Direction = "left" | "right" | "center";
 export type Align = "left" | "right" | "center" | "justify";
 export type Theme = "light" | "dark";
@@ -16,7 +17,9 @@ export type Color =
   | "dark"
   | "light"
   | "gray";
-export interface IProps {
-  flex: TFlex;
-  direction: FlexDirection;
+export interface AppProps {
+  flex?: TFlex;
+  direction?: FlexDirection;
+  className?: string;
+  children?: ReactNode | ReactElement;
 }

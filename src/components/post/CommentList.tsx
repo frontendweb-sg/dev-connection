@@ -2,6 +2,7 @@ import Avatar from "../Avatar";
 import Box from "../Box";
 import Button from "../Button";
 import Typography from "../Typegraphy";
+import Reply from "./Reply";
 
 const CommentList = () => {
   return (
@@ -15,9 +16,7 @@ const CommentList = () => {
               soluta cumque, voluptate nesciunt sint,
             </Typography>
           </Box>
-          <Box className="d-flex justify-content-end">
-            <Button variant="text">Reply</Button>
-          </Box>
+          <Reply />
         </li>
       </ul>
     </Box>
