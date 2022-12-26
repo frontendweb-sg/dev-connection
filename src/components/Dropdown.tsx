@@ -1,7 +1,10 @@
 import classNames from "classnames";
 import Box from "./Box";
+import Button from "./Button";
+import IconButton from "./IconButton";
+import Icon from "./Icon";
 import { IconName } from "@fortawesome/fontawesome-svg-core";
-import {
+import React, {
   createContext,
   FC,
   ReactElement,
@@ -10,11 +13,8 @@ import {
   useRef,
 } from "react";
 import { useToggle } from "../hooks/useToggle";
-import Button from "./Button";
-import IconButton from "./IconButton";
 import { Direction } from "../types";
 import { Link, To } from "react-router-dom";
-import Icon from "./Icon";
 import { useClickOutside } from "../hooks/useClickOutside";
 
 interface IDropdownContext {
@@ -23,6 +23,7 @@ interface IDropdownContext {
   onClose?: () => void;
   onToggle?: () => void;
 }
+
 const DropdownContext = createContext<IDropdownContext>({ open: false });
 interface IDropdownProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   dropdownBodyProps?: IDropdownBodyProps;
@@ -30,6 +31,7 @@ interface IDropdownProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
   component?: ReactElement | ReactNode | Function;
   btnProps?: IDropdownButtonProps;
 }
+
 /**
  * Dropdown component
  * @returns
@@ -45,7 +47,7 @@ const Dropdown: FC<IDropdownProps> = ({
   ...rest
 }) => {
   const { open, onClose, onOpen, onToggle } = useToggle();
-  const dropRef = useRef();
+  const dropRef = useRef<HTMLDivElement>(null);
   const classes = classNames("dropdown", className);
 
   // close dropdown when click outside

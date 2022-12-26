@@ -8,6 +8,7 @@ import Icon from "../components/Icon";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/Auth";
 /**
  * Signin page
  * @returns
@@ -23,15 +24,17 @@ const validation = yup.object().shape({
   password: yup.string().required(),
 });
 const Signin = () => {
+  const { onSignin } = useAuth();
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
-        email: "",
-        password: "",
+        email: "pkumar2@pythian.com",
+        password: "Admin$1234@",
       },
       validationSchema: validation,
       onSubmit: (values: IValues) => {
         console.log(values);
+        onSignin(values);
       },
     });
   return (

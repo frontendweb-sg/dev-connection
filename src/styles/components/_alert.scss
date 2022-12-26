@@ -1,0 +1,30 @@
+.alert {
+  .btn-close{position: absolute;right:10px;}
+  border-radius: 4px;
+  &-snackbar {
+    padding-right: 40px;
+    position: absolute;
+    top: 20px;
+    z-index: 1031;
+  }
+
+  &-left {
+    left: 20px;
+  }
+
+  &-right {
+    right: 20px
+  }
+
+  &-center {
+    left: 0;
+    right: 0;
+    margin: auto
+  }
+
+  @each $k, $v in $alert-sizes{
+    &-#{$k}{
+      min-width: $v;
+    }
+  }
+}

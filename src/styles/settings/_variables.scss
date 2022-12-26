@@ -76,3 +76,13 @@ $image-sizes:(
   "lg":80px,
   "xl":100px
 ) !default;
+
+
+// alert
+$alert-sizes:(
+  "xs":300px,
+  "sm":400px,
+  "md":500px,
+  "lg":600px,
+  "xl":100%,
+)

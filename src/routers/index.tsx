@@ -38,7 +38,7 @@ const Routers = () => {
         <Route path="auth" element={<Auth />}>
           <Route index element={<Signin />} />
           <Route path="signup" element={<Signup />} />
-          <Route path="email-verification" element={<VerifyEmail />} />
+          <Route path="verify-email" element={<VerifyEmail />} />
           <Route path="forgot-password" element={<ForgotPassword />} />
         </Route>
 

@@ -11,7 +11,12 @@ const Comment = () => {
     <Box className="post-comment mt-3">
       <Box className="d-flex align-items-center">
         <Avatar className="me-2" size="sm" />
-        <Input placeholder="Add comment" />
+        <Input
+          value=""
+          name="comment"
+          onChange={() => {}}
+          placeholder="Add comment"
+        />
       </Box>
     </Box>
   );

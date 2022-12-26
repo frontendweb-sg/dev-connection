@@ -1,6 +1,6 @@
-import { FC, forwardRef } from "react";
+import { forwardRef } from "react";
 import classNames from "classnames";
-interface IProps extends React.HtmlHTMLAttributes<HTMLDivElement> {}
+export interface IBoxProps extends React.HtmlHTMLAttributes<HTMLDivElement> {}
 export type BoxRef = HTMLDivElement;
 
 /**
@@ -8,7 +8,7 @@ export type BoxRef = HTMLDivElement;
  * @param param0
  * @returns
  */
-const Box: FC<IProps> = forwardRef<BoxRef, IProps>((props, ref) => {
+const Box = forwardRef<BoxRef, IBoxProps>((props, ref) => {
   const { children, className, ...rest } = props;
   const classes = classNames(className);
   return (

@@ -1,10 +1,14 @@
 import { FC } from "react";
 import { IPost } from "../../services/post.services";
 import Box from "../Box";
+import DateTime from "../DateTime";
+import Typography from "../Typegraphy";
 import Comment from "./Comment";
 import CommentList from "./CommentList";
 import Like from "./Like";
+import PostImage from "./PostImage";
 import PostUser from "./PostUser";
+import Share from "./Share";
 
 /**
  * Post component
@@ -17,11 +21,20 @@ interface IPostProps {
 const Post: FC<IPostProps> = ({ post }) => {
   return (
     <Box className="post">
-      <PostUser name="Pradeep kumar" className="mb-3" />
-      <Box className="post-image">
-        <img src="/post-1.jpg" alt="" />
+      <PostUser
+        name="Pradeep kumar"
+        designation="Sr. software engineer"
+        className="mb-3"
+      />
+      <PostImage />
+
+      <Typography variant="subtitle2">
+        Posted on <DateTime />
+      </Typography>
+      <Box className="d-flex aling-items-center">
+        <Like />
+        <Share />
       </Box>
-      <Like />
       <Comment />
 
       <CommentList />

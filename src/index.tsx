@@ -5,18 +5,24 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import "./lib/icons";
 import "./index.scss";
-
+import AuthProvider from "./context/Auth";
+import { Provider } from "react-redux";
+import Store from "./store";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Suspense fallback={<h1>Loading...</h1>}>
-        <App />
-      </Suspense>
-    </BrowserRouter>
+    <Provider store={Store}>
+      <BrowserRouter>
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <AuthProvider>
+            <App />
+          </AuthProvider>
+        </Suspense>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 
