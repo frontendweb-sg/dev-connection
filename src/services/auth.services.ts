@@ -1,3 +1,6 @@
+import axios from "axios";
+const URL = `${process.env.REACT_APP_API_URL}auth`;
+
 export interface IAuth {
   _id?: string;
   firstname: string;
@@ -8,6 +11,10 @@ export interface IAuth {
   active?: boolean;
 }
 
+export interface IAuthLogin {
+  email: string;
+  password: string;
+}
 class AuthService {
   getObject() {
     return {
@@ -19,9 +26,14 @@ class AuthService {
     } as IAuth;
   }
 
-  signIn() {}
-  signUp() {}
-  forgotPassword() {}
+  signIn(body: IAuthLogin) {
+    return axios.post(URL, body);
+  }
+  signUp(body: IAuth) {
+    return axios.post(URL + "/signup", body);
+  }
+
+  forgotPassword(email: string) {}
   verifyEmail() {}
 }
 
