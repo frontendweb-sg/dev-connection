@@ -1,13 +1,21 @@
 import classNames from "classnames";
 import Box from "./Box";
 import { IconName } from "@fortawesome/fontawesome-svg-core";
-import { createContext, FC, ReactElement, ReactNode, useContext } from "react";
+import {
+  createContext,
+  FC,
+  ReactElement,
+  ReactNode,
+  useContext,
+  useRef,
+} from "react";
 import { useToggle } from "../hooks/useToggle";
 import Button from "./Button";
 import IconButton from "./IconButton";
 import { Direction } from "../types";
 import { Link, To } from "react-router-dom";
 import Icon from "./Icon";
+import { useClickOutside } from "../hooks/useClickOutside";
 
 interface IDropdownContext {
   open: Boolean;
@@ -37,11 +45,14 @@ const Dropdown: FC<IDropdownProps> = ({
   ...rest
 }) => {
   const { open, onClose, onOpen, onToggle } = useToggle();
+  const dropRef = useRef();
   const classes = classNames("dropdown", className);
 
+  // close dropdown when click outside
+  useClickOutside(dropRef, onClose);
   return (
     <DropdownContext.Provider value={{ open, onOpen, onClose, onToggle }}>
-      <Box className={classes} {...rest}>
+      <Box ref={dropRef!} className={classes} {...rest}>
         <DropdownButton {...btnProps} />
         <DropdownBody {...dropdownBodyProps}>{children}</DropdownBody>
       </Box>
