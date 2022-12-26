@@ -81,7 +81,10 @@ const AuthProvider = ({ children }: RootProps) => {
   const onSignin = async (body: IAuthLogin) => {
     try {
       const { data } = await authService.signIn(body);
-      localStorage.setItem("user", JSON.stringify(data.data));
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ user: data.data, token: data.token })
+      );
       localStorage.setItem("expireTime", JSON.stringify(data.expireTime));
       dispatch({ type: "AUTH_SUCCESS", payload: data });
       navigation("/user");
@@ -92,7 +95,7 @@ const AuthProvider = ({ children }: RootProps) => {
     }
   };
 
-  // sign in
+  // sign
   const onSignup = () => {};
 
   // signout
@@ -107,7 +110,6 @@ const AuthProvider = ({ children }: RootProps) => {
   const checkUserIsLoggedIn = () => {
     const user = JSON.parse(localStorage.user);
     const expireTime = new Date(JSON.parse(localStorage.expireTime));
-    console.log("user", user);
     if (user && new Date() < expireTime) {
       dispatch({ type: "AUTH_SUCCESS", payload: user });
     } else {
