@@ -7,8 +7,9 @@ import Button from "../components/Button";
 import Icon from "../components/Icon";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/Auth";
+
 /**
  * Signin page
  * @returns
@@ -25,6 +26,7 @@ const validation = yup.object().shape({
 });
 const Signin = () => {
   const { onSignin } = useAuth();
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
@@ -33,10 +35,10 @@ const Signin = () => {
       },
       validationSchema: validation,
       onSubmit: (values: IValues) => {
-        console.log(values);
         onSignin(values);
       },
     });
+
   return (
     <Form className="auth-form" onSubmit={handleSubmit}>
       <Box className="auth-title mb-3">

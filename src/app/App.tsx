@@ -11,12 +11,12 @@ function App() {
   const { checkUserIsLoggedIn } = useAuth();
 
   useEffect(() => {
-    const user = localStorage?.user;
-    console.log("hi");
+    const user = localStorage.getItem("user");
     if (user) {
-      checkUserIsLoggedIn?.();
+      checkUserIsLoggedIn();
     }
-  }, []);
+  }, [checkUserIsLoggedIn]);
+
   return (
     <>
       <Alert />

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 const URL = `${process.env.REACT_APP_API_URL}auth`;
 
 export interface IUser {
@@ -26,6 +26,7 @@ export interface IAuthLogin {
   email: string;
   password: string;
 }
+
 export interface IAuthResult {
   data: IUser;
   token: string;
@@ -42,16 +43,13 @@ class AuthService {
     } as IAuthSignup;
   }
 
-  signIn(body: IAuthLogin) {
+  signIn(body: IAuthLogin): Promise<AxiosResponse<IAuthResult>> {
     return axios.post<IAuthResult>(URL, body);
   }
 
-  signUp(body: IAuthSignup) {
+  signUp(body: IAuthSignup): Promise<AxiosResponse<IAuthResult>> {
     return axios.post(URL + "/signup", body);
   }
-
-  forgotPassword(email: string) {}
-  verifyEmail() {}
 }
 
 const authService = new AuthService();

@@ -1,5 +1,7 @@
 import { lazy } from "react";
 import { Routes, Route } from "react-router-dom";
+import { useAuth } from "../context/Auth";
+import Private from "./Private";
 
 const Home = lazy(() => import("../pages/Home"));
 const About = lazy(() => import("../pages/About"));
@@ -18,10 +20,14 @@ const Dashboard = lazy(() => import("../admin/Dashboard"));
 
 // users
 const Users = lazy(() => import("../admin/Users"));
-const UserDashboard = lazy(() => import("../user/Dashboard"));
 
 const User = lazy(() => import("../user"));
-
+const UserDashboard = lazy(() => import("../user/Dashboard"));
+const UserProfile = lazy(() => import("../user/Profile"));
+const UserSetting = lazy(() => import("../user/Setting"));
+const UserPosts = lazy(() => import("../user/Posts"));
+const UserPhotos = lazy(() => import("../user/Photos"));
+const UserVideos = lazy(() => import("../user/Videos"));
 /**
  * Routers component
  * @returns
@@ -35,7 +41,8 @@ const Routers = () => {
         <Route path="contact" element={<Contact />} />
 
         {/* Auth  */}
-        <Route path="auth" element={<Auth />}>
+        <Route path="auth" element={
+        <Auth />}>
           <Route index element={<Signin />} />
           <Route path="signup" element={<Signup />} />
           <Route path="verify-email" element={<VerifyEmail />} />
@@ -43,14 +50,33 @@ const Routers = () => {
         </Route>
 
         {/* Admin */}
-        <Route path="admin" element={<Admin />}>
+        <Route
+          path="admin"
+          element={
+            <Private>
+              <Admin />
+            </Private>
+          }
+        >
           <Route index element={<Dashboard />} />
           <Route path="users" element={<Users />} />
         </Route>
 
         {/* User */}
-        <Route path="user" element={<User />}>
+        <Route
+          path="user"
+          element={
+            <Private>
+              <User />
+            </Private>
+          }
+        >
           <Route index element={<UserDashboard />} />
+          <Route path="posts" element={<UserPosts />} />
+          <Route path="photos" element={<UserPhotos />} />
+          <Route path="videos" element={<UserVideos />} />
+          <Route path="profile" element={<UserProfile />} />
+          <Route path="settings" element={<UserSetting />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Route>

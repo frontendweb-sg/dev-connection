@@ -1,5 +1,9 @@
+/**
+ * User settings
+ * @returns
+ */
 const Setting = () => {
-  return <h1>Seeeting</h1>;
+  return <h1>User Seeting</h1>;
 };
 
 export default Setting;

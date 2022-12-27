@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import Col from "../components/Col";
 import Container from "../components/Container";
 import Row from "../components/Row";
@@ -12,22 +12,21 @@ import Header from "../layout/Header";
  * @returns
  */
 const Auth = () => {
-  const navigate = useNavigate();
   useAddClass("root-auth");
-  const { isAdmin, isAuth, user, token } = useAuth();
+  const nav = useNavigate();
+  const { redirectUrl, isAuth, isAdmin, user } = useAuth();
 
-  console.log(isAdmin, isAuth, token, user);
   // if (isAuth && !isAdmin && !user?.verify) {
-  //   navigate("/auth/verify-email");
+  //   return <Navigate to="/auth/verify-email" />;
   // }
 
-  // if (isAuth && isAdmin) {
-  //   navigate("/admin");
-  // }
+  if (isAuth && isAdmin) {
+    return <Navigate to="/admin" />;
+  }
 
-  // if (isAuth && !isAdmin) {
-  //   navigate("/user");
-  // }
+  if (isAuth && !isAdmin) {
+    return <Navigate to="/user" />;
+  }
 
   return (
     <>
