@@ -2,12 +2,13 @@ import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./app/App";
 import reportWebVitals from "./reportWebVitals";
+import Store from "./store";
+import AuthProvider from "./context/Auth";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 import "./lib/icons";
 import "./index.scss";
-import AuthProvider from "./context/Auth";
-import { Provider } from "react-redux";
-import Store from "./store";
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

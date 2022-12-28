@@ -10,7 +10,7 @@ const Navigation = () => {
     <nav className="navbar-center">
       <ul className="navbar-nav">
         <li className="nav-item">
-          <NavLink to="/" className="nav-link">
+          <NavLink to="/user" className="nav-link">
             <Icon icon="home" />
           </NavLink>
         </li>
@@ -25,8 +25,8 @@ const Navigation = () => {
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="/" className="nav-link">
-            <Icon icon="home" />
+          <NavLink to="/user/" className="nav-link">
+            <Icon icon="image" />
           </NavLink>
         </li>
       </ul>

@@ -12,6 +12,7 @@ interface IHeaderProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 const Header: FC<IHeaderProps> = ({ type }) => {
+  console.log(type);
   switch (type) {
     case "auth":
       return <AuthHeader />;

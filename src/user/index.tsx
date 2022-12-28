@@ -2,7 +2,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import Container from "../components/Container";
 import { useAuth } from "../hooks/useAuth";
 import Footer from "../layout/Footer";
-import Header from "../layout/Header";
+import UserHeader from "../layout/UserHeader";
 import { Role } from "../util/enums";
 
 /**
@@ -31,7 +31,7 @@ const User = () => {
 
   return (
     <>
-      <Header type="private" />
+      <UserHeader />
       <main className="mt-3 mb-3">
         <Container>
           <Outlet />
