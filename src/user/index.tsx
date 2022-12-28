@@ -1,5 +1,6 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import Container from "../components/Container";
+import { useAddClass } from "../hooks/useAddClass";
 import { useAuth } from "../hooks/useAuth";
 import Footer from "../layout/Footer";
 import UserHeader from "../layout/UserHeader";
@@ -14,6 +15,8 @@ const Roles: string[] = [Role.admin, Role.user];
 const User = () => {
   const location = useLocation();
   const auth = useAuth();
+
+  useAddClass("root-user");
 
   if (!auth.isAuth) {
     return <Navigate to="/auth" state={{ from: location }} replace />;

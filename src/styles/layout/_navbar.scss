@@ -3,10 +3,9 @@
   --light-bg: #{$navbar-bg-light};
   --height: #{$navbar-height};
   --shadow: #{$navbar-shadow};
-
   transition: all 300ms linear;
   height: var(--height);
-
+  background-color: var(--light-bg);
   &-private{
     border-bottom: 1px solid $gray-200;
   }

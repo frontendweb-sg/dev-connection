@@ -14,4 +14,12 @@ body {
   > main {
     flex: 1;
   }
+
+}
+
+
+.root{
+  &-user{
+    background-color: #eff2f6;
+  }
 }

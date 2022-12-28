@@ -31,7 +31,7 @@ interface IPost {
 }
 
 class PostService {
-  data() {
+  getObject() {
     return {
       category: "",
       user: "",

@@ -1,6 +1,10 @@
 .avatar{
-  border-radius: 50px; 
-  border:2px solid $gray-300;
+  &.square{
+    border-radius: 20px;
+  }
+  &.rounded{
+        border-radius: 50px; 
+  }
   @each $k,$v in $image-sizes{
     &-#{$k}{
       min-width:$v;
