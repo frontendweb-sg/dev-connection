@@ -5,7 +5,6 @@ import {
   authService,
   IAuthLogin,
   IAuthResult,
-  IAuthSignup,
   IUser,
 } from "../services/auth.services";
 import { alertShow } from "../store/reducers/alert.reducer";
@@ -46,7 +45,7 @@ interface IAuthContext extends IAuthState {
 let timer: ReturnType<typeof setTimeout>; // timer
 
 // Auth context
-const AuthContext = createContext<IAuthContext>({} as IAuthContext);
+export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 const useAuth = () => useContext(AuthContext);
 
 // Auth provider
@@ -55,10 +54,24 @@ const AuthProvider = ({ children }: RootProps) => {
   const navigate = useNavigate();
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const onRedirected = (user: IUser) => {
+    let url = "/";
+    if (user.role === "admin") {
+      url = "/admin";
+      dispatch({ type: "AUTH_REDIRECT", payload: url });
+    } else {
+      url = "/user";
+      dispatch({ type: "AUTH_REDIRECT", payload: url });
+    }
+    console.log(url);
+    navigate(url, { replace: true });
+  };
+
   const onSignin = async (body: IAuthLogin) => {
     try {
       const { data } = await authService.signIn(body);
       const expireDate = new Date(data.expireTime);
+
       localStorage.setItem(
         "user",
         JSON.stringify({ data: data.data, token: data.token })
@@ -66,19 +79,10 @@ const AuthProvider = ({ children }: RootProps) => {
       localStorage.setItem("expireDate", JSON.stringify(expireDate));
       dispatch({ type: "AUTH_SUCCESS", payload: data });
 
-      if (data.data.role === "admin") {
-        dispatch({ type: "AUTH_REDIRECT", payload: "/admin" });
-      } else {
-        dispatch({ type: "AUTH_REDIRECT", payload: "/user" });
-      }
-
-      autoLogout(+data.expireTime);
+      autoLogout(expireDate.getTime() - new Date().getTime());
       checkUserIsLoggedIn();
 
-      // navigate
-      navigate(data.data.role === "admin" ? "/admin" : "/user", {
-        replace: true,
-      });
+      onRedirected(data.data);
     } catch (error) {
       if (error instanceof Error) {
         appDispatch(alertShow({ message: error.message, color: "danger" }));
@@ -97,6 +101,7 @@ const AuthProvider = ({ children }: RootProps) => {
   };
 
   const autoLogout = useCallback((time: number) => {
+    console.log("call", time);
     timer = setTimeout(onSignout, time);
   }, []);
 

@@ -22,14 +22,14 @@ const alertSlice = createSlice({
   name: "alert",
   initialState,
   reducers: {
-    alertShow: (state, action: PayloadAction<IAlert>) => {
+    alertShow: (state: IAlert, action: PayloadAction<IAlert>) => {
       const { payload } = action;
       state.visible = true;
       state.message = payload.message;
       state.color = payload.color;
       state.size = payload.size;
     },
-    alertHide: (state) => {
+    alertHide: (state: IAlert) => {
       state.visible = false;
       state.message = "";
     },

@@ -1,15 +1,17 @@
-html{
-  height: 100%;
-
-}
-
-body{
+html {
   height: 100%;
 }
 
-#root{
+body {
+  height: 100%;
+}
+
+#root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  > main{flex:1}
+  position: relative;
+  > main {
+    flex: 1;
+  }
 }

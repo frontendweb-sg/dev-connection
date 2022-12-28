@@ -1,7 +1,6 @@
+import Private from "./Private";
 import { lazy } from "react";
 import { Routes, Route } from "react-router-dom";
-import { useAuth } from "../context/Auth";
-import Private from "./Private";
 
 const Home = lazy(() => import("../pages/Home"));
 const About = lazy(() => import("../pages/About"));
@@ -41,8 +40,7 @@ const Routers = () => {
         <Route path="contact" element={<Contact />} />
 
         {/* Auth  */}
-        <Route path="auth" element={
-        <Auth />}>
+        <Route path="auth" element={<Auth />}>
           <Route index element={<Signin />} />
           <Route path="signup" element={<Signup />} />
           <Route path="verify-email" element={<VerifyEmail />} />
@@ -50,27 +48,13 @@ const Routers = () => {
         </Route>
 
         {/* Admin */}
-        <Route
-          path="admin"
-          element={
-            <Private>
-              <Admin />
-            </Private>
-          }
-        >
+        <Route path="admin" element={<Admin />}>
           <Route index element={<Dashboard />} />
           <Route path="users" element={<Users />} />
         </Route>
 
         {/* User */}
-        <Route
-          path="user"
-          element={
-            <Private>
-              <User />
-            </Private>
-          }
-        >
+        <Route path="user" element={<User />}>
           <Route index element={<UserDashboard />} />
           <Route path="posts" element={<UserPosts />} />
           <Route path="photos" element={<UserPhotos />} />

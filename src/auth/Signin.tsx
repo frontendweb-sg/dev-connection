@@ -7,7 +7,7 @@ import Button from "../components/Button";
 import Icon from "../components/Icon";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/Auth";
 
 /**
@@ -80,7 +80,7 @@ const Signin = () => {
           <Link className="text-danger link mb-3" to="/auth/forgot-password">
             <Icon icon="key" className="me-2" /> Forgot password
           </Link>
-          <Button>Login</Button>
+          <Button type="submit">Login</Button>
         </Box>
       </Box>
     </Form>
