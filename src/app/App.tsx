@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Alert from "../components/Snackbar";
-import { useAuth } from "../context/Auth";
+import { useAuth } from "../hooks/useAuth";
 import Routers from "../routers";
 
 /**

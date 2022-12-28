@@ -8,7 +8,7 @@ import Icon from "../components/Icon";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/Auth";
+import { useAuth } from "../hooks/useAuth";
 
 /**
  * Signin page

@@ -2,7 +2,7 @@ import { Navigate, Outlet, useNavigate } from "react-router-dom";
 import Col from "../components/Col";
 import Container from "../components/Container";
 import Row from "../components/Row";
-import { useAuth } from "../context/Auth";
+import { useAuth } from "../hooks/useAuth";
 import { useAddClass } from "../hooks/useAddClass";
 import Footer from "../layout/Footer";
 import Header from "../layout/Header";

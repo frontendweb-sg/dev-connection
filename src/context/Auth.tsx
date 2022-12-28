@@ -1,10 +1,11 @@
-import { useReducer, createContext, useContext, useCallback } from "react";
+import { useReducer, createContext, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../hook";
 import {
   authService,
   IAuthLogin,
   IAuthResult,
+  IAuthSignup,
   IUser,
 } from "../services/auth.services";
 import { alertShow } from "../store/reducers/alert.reducer";
@@ -20,39 +21,29 @@ interface IAuthState {
   error?: string | null;
 }
 
-type ACTIONTYPE =
-  | { type: "AUTH_LOADING"; payload: boolean }
-  | { type: "AUTH_SUCCESS"; payload: IAuthResult }
-  | { type: "AUTH_LOGOUT"; payload: null }
-  | { type: "AUTH_REDIRECT"; payload: string };
-
-const initialState = {
-  user: null,
-  token: null,
-  error: null,
-  loading: false,
-  isAdmin: false,
-  isAuth: false,
-  redirectUrl: "/",
-};
-
 interface IAuthContext extends IAuthState {
   onSignin: (body: IAuthLogin) => void;
-  // onSignup: (body: IAuthSignup) => void;
+  onSignup: (body: IAuthSignup) => void;
   checkUserIsLoggedIn: () => void;
+  onLogout: () => void;
 }
 
 let timer: ReturnType<typeof setTimeout>; // timer
-
-// Auth context
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
-const useAuth = () => useContext(AuthContext);
 
 // Auth provider
 const AuthProvider = ({ children }: RootProps) => {
   const appDispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, {
+    user: null,
+    token: null,
+    error: null,
+    loading: false,
+    isAdmin: false,
+    isAuth: false,
+    redirectUrl: "/",
+  });
 
   const onRedirected = (user: IUser) => {
     let url = "/";
@@ -63,7 +54,6 @@ const AuthProvider = ({ children }: RootProps) => {
       url = "/user";
       dispatch({ type: "AUTH_REDIRECT", payload: url });
     }
-    console.log(url);
     navigate(url, { replace: true });
   };
 
@@ -76,6 +66,7 @@ const AuthProvider = ({ children }: RootProps) => {
         "user",
         JSON.stringify({ data: data.data, token: data.token })
       );
+
       localStorage.setItem("expireDate", JSON.stringify(expireDate));
       dispatch({ type: "AUTH_SUCCESS", payload: data });
 
@@ -90,8 +81,17 @@ const AuthProvider = ({ children }: RootProps) => {
     }
   };
 
-  // signout
-  const onSignout = () => {
+  const onSignup = async (body: IAuthSignup) => {
+    try {
+      const response = await authService.signUp(body);
+      
+    } catch (error) {
+      if (error instanceof Error) {
+        appDispatch(alertShow({ message: error.message, color: "danger" }));
+      }
+    }
+  };
+  const onLogout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("expireDate");
     dispatch({ type: "AUTH_LOGOUT", payload: null });
@@ -101,17 +101,15 @@ const AuthProvider = ({ children }: RootProps) => {
   };
 
   const autoLogout = useCallback((time: number) => {
-    console.log("call", time);
-    timer = setTimeout(onSignout, time);
+    timer = setTimeout(onLogout, time);
   }, []);
 
-  // Checked user is logged in
   const checkUserIsLoggedIn = useCallback(() => {
     const user = JSON.parse(localStorage.user as string);
     const expireDate = new Date(JSON.parse(localStorage.expireDate));
 
     if (!user || expireDate < new Date()) {
-      onSignout();
+      onLogout();
     } else {
       dispatch({ type: "AUTH_SUCCESS", payload: user });
       const time = expireDate.getTime() - new Date().getTime();
@@ -122,16 +120,23 @@ const AuthProvider = ({ children }: RootProps) => {
   }, [autoLogout]);
 
   return (
-    <AuthContext.Provider value={{ ...state, onSignin, checkUserIsLoggedIn }}>
+    <AuthContext.Provider
+      value={{ ...state, onSignin, checkUserIsLoggedIn, onSignup, onLogout }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
 
-export { useAuth };
 export default AuthProvider;
 
 // Auth Reducer
+type ACTIONTYPE =
+  | { type: "AUTH_LOADING"; payload: boolean }
+  | { type: "AUTH_SUCCESS"; payload: IAuthResult }
+  | { type: "AUTH_LOGOUT"; payload: null }
+  | { type: "AUTH_REDIRECT"; payload: string };
+
 function reducer(state: IAuthState, action: ACTIONTYPE) {
   const { type, payload } = action;
   switch (type) {

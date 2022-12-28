@@ -16,6 +16,9 @@ import {
   faEdit,
   faTrash,
   faShare,
+  faUser,
+  faSignOut,
+  faCog,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -34,5 +37,8 @@ library.add(
   faEllipsisV,
   faEdit,
   faTrash,
-  faShare
+  faShare,
+  faUser,
+  faSignOut,
+  faCog
 );

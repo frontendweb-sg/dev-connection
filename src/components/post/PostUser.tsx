@@ -45,7 +45,7 @@ const PostUser: FC<IPostUser> = ({
           )}
         </Typography>
       </Box>
-      <Dropdown dropdownBodyProps={{ direction: "right" }}>
+      <Dropdown direction="right">
         <Dropdown.Item icon="edit">Edit</Dropdown.Item>
         <Dropdown.Item icon="eye">Inactive</Dropdown.Item>
         <Divider />

@@ -1,6 +1,7 @@
 import { forwardRef } from "react";
 import classNames from "classnames";
-export interface IBoxProps extends React.HtmlHTMLAttributes<HTMLDivElement> {}
+export interface IBoxProps
+  extends React.HtmlHTMLAttributes<HTMLDivElement | HTMLElement> {}
 export type BoxRef = HTMLDivElement;
 
 /**

@@ -1,81 +1,55 @@
-import classNames from "classnames";
-import Box from "./Box";
-import Button from "./Button";
-import IconButton from "./IconButton";
-import Icon from "./Icon";
-import { IconName } from "@fortawesome/fontawesome-svg-core";
-import React, {
-  createContext,
-  FC,
-  ReactElement,
-  ReactNode,
-  useContext,
-  useRef,
-} from "react";
+import Button from "../components/Button";
+import IconButton from "../components/IconButton";
 import { useToggle } from "../hooks/useToggle";
-import { Direction } from "../types";
-import { Link, To } from "react-router-dom";
+import Box from "../components/Box";
+import classNames from "classnames";
+import Icon from "../components/Icon";
+import { Link } from "react-router-dom";
+import {
+  DropdownContext,
+  dropdownDefaultProps,
+  IDropdownBodyProps,
+  IDropdownButtonProps,
+  IDropdownItemProps,
+  IDropdownProps,
+} from "../context/Dropdown";
+import { useContext, useRef } from "react";
 import { useClickOutside } from "../hooks/useClickOutside";
-
-interface IDropdownContext {
-  open: Boolean;
-  onOpen?: () => void;
-  onClose?: () => void;
-  onToggle?: () => void;
-}
-
-const DropdownContext = createContext<IDropdownContext>({ open: false });
-interface IDropdownProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
-  dropdownBodyProps?: IDropdownBodyProps;
-  icon?: IconName;
-  component?: ReactElement | ReactNode | Function;
-  btnProps?: IDropdownButtonProps;
-}
 
 /**
  * Dropdown component
+ * @param props
  * @returns
  */
-
-const Dropdown: FC<IDropdownProps> = ({
-  dropdownBodyProps,
-  btnProps,
-  className,
-  children,
-  icon,
-  component,
-  ...rest
-}) => {
+const Dropdown = (props: IDropdownProps) => {
+  const { children, icon, title, direction, component, className, ...rest } =
+    props;
   const { open, onClose, onOpen, onToggle } = useToggle();
   const dropRef = useRef<HTMLDivElement>(null);
   const classes = classNames("dropdown", className);
 
-  // close dropdown when click outside
   useClickOutside(dropRef, onClose);
+  const state = {
+    open,
+    onOpen,
+    onClose,
+    onToggle,
+  };
+
   return (
-    <DropdownContext.Provider value={{ open, onOpen, onClose, onToggle }}>
+    <DropdownContext.Provider value={state}>
       <Box ref={dropRef!} className={classes} {...rest}>
-        <DropdownButton {...btnProps} />
-        <DropdownBody {...dropdownBodyProps}>{children}</DropdownBody>
+        <DropdownButton icon={icon} title={title} component={component} />
+        <DropdownBody direction={direction}>{children}</DropdownBody>
       </Box>
     </DropdownContext.Provider>
   );
 };
 
-interface IDropdownBodyProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
-  direction?: Direction;
-}
-/**
- * Dropdown menu
- * @param param0
- * @returns
- */
-const DropdownBody: FC<IDropdownBodyProps> = ({
-  children,
-  className,
-  direction,
-  ...rest
-}) => {
+Dropdown.defaultProps = dropdownDefaultProps;
+
+const DropdownBody = (props: IDropdownBodyProps) => {
+  const { children, className, direction, ...rest } = props;
   const { open } = useContext(DropdownContext);
   const classes = classNames(
     "dropdown-menu",
@@ -90,46 +64,39 @@ const DropdownBody: FC<IDropdownBodyProps> = ({
   );
 };
 
-interface IDropdownButtonProps {
-  icon?: IconName;
-  label?: string;
-}
-const DropdownButton: FC<IDropdownButtonProps> = ({ icon, label, ...rest }) => {
+/**
+ * React dropdown button
+ * @param props
+ * @returns
+ */
+const DropdownButton = (props: IDropdownButtonProps) => {
+  const { title, component, icon, ...rest } = props;
   const { onToggle } = useContext(DropdownContext);
-  return label ? (
-    <Button onClick={onToggle} {...rest}>
-      {label}
-    </Button>
-  ) : (
+  if (title) {
+    return (
+      <Button onClick={onToggle} {...rest}>
+        {title}
+      </Button>
+    );
+  }
+  if (component) return component;
+  return (
     <IconButton onClick={onToggle} icon={icon ?? "ellipsis-h"} {...rest} />
   );
 };
 
-interface IDropdonwItemProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement | HTMLLIElement> {
-  link?: boolean;
-  to?: To;
-  icon?: IconName;
-}
-/**
- * Dropdown item
- * @param param0
- * @returns
- */
-const DropdownItem: FC<IDropdonwItemProps> = ({
-  link,
-  to,
-  children,
-  className,
-  icon,
-  ...rest
-}) => {
+const DropdownItem = (props: IDropdownItemProps) => {
+  const { link, to, icon, className, children, ...rest } = props;
   const classes = classNames("dropdown-item", className);
-  return link ? (
-    <Link to={to!} className={classes} {...rest}>
-      {icon && <Icon icon={icon} />} {children}
-    </Link>
-  ) : (
+  if (link) {
+    return (
+      <Link to={to!} className={classes} {...rest}>
+        {icon && <Icon icon={icon} />} {children}
+      </Link>
+    );
+  }
+
+  return (
     <Box className={classes}>
       {icon && <Icon icon={icon} />}
       {children}
@@ -137,4 +104,8 @@ const DropdownItem: FC<IDropdonwItemProps> = ({
   );
 };
 
-export default Object.assign(Dropdown, { DropdownButton, Item: DropdownItem });
+export default Object.assign(Dropdown, {
+  Body: DropdownBody,
+  Button: DropdownButton,
+  Item: DropdownItem,
+});
