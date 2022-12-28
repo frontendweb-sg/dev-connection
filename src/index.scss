@@ -9,11 +9,15 @@
 @import "./styles/layout/footer";
 
 
+@import "./styles/components/loading";
 @import "./styles/components/image";
 @import "./styles/components/post";
 @import "./styles/components/dropdown";
 @import "./styles/components/alert";
 
-@import "./styles/pages/auth";
+
 @import "./styles/form/input";
 @import "./styles/form/button";
+
+@import "./styles/pages/auth";
+@import "./styles/pages/landing";

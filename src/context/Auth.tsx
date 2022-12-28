@@ -1,5 +1,5 @@
 import { useReducer, createContext, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../hook";
 import {
   authService,
@@ -35,6 +35,7 @@ export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 const AuthProvider = ({ children }: RootProps) => {
   const appDispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [state, dispatch] = useReducer(reducer, {
     user: null,
     token: null,
@@ -45,17 +46,20 @@ const AuthProvider = ({ children }: RootProps) => {
     redirectUrl: "/",
   });
 
-  const onRedirected = (user: IUser) => {
-    let url = "/";
-    if (user.role === "admin") {
-      url = "/admin";
-      dispatch({ type: "AUTH_REDIRECT", payload: url });
-    } else {
-      url = "/user";
-      dispatch({ type: "AUTH_REDIRECT", payload: url });
-    }
-    navigate(url, { replace: true });
-  };
+  const onRedirected = useCallback(
+    (user: IUser) => {
+      let url = "/";
+      if (user.role === "admin") {
+        url = pathname ?? "/admin";
+        dispatch({ type: "AUTH_REDIRECT", payload: url });
+      } else {
+        url = pathname ?? "/user";
+        dispatch({ type: "AUTH_REDIRECT", payload: url });
+      }
+      navigate(url, { replace: true });
+    },
+    [navigate, pathname]
+  );
 
   const onSignin = async (body: IAuthLogin) => {
     try {
@@ -83,8 +87,7 @@ const AuthProvider = ({ children }: RootProps) => {
 
   const onSignup = async (body: IAuthSignup) => {
     try {
-      const response = await authService.signUp(body);
-      
+      //const response = await authService.signUp(body);
     } catch (error) {
       if (error instanceof Error) {
         appDispatch(alertShow({ message: error.message, color: "danger" }));
@@ -111,13 +114,14 @@ const AuthProvider = ({ children }: RootProps) => {
     if (!user || expireDate < new Date()) {
       onLogout();
     } else {
+      onRedirected(user.data);
       dispatch({ type: "AUTH_SUCCESS", payload: user });
       const time = expireDate.getTime() - new Date().getTime();
       if (time > 0) {
         autoLogout(time);
       }
     }
-  }, [autoLogout]);
+  }, [autoLogout, onRedirected]);
 
   return (
     <AuthContext.Provider

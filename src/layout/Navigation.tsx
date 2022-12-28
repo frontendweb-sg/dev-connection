@@ -20,15 +20,20 @@ const Navigation = () => {
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="/user/developers" className="nav-link">
+          <NavLink to="/user/friends" className="nav-link">
             <Icon icon="users" />
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to="/user/" className="nav-link">
+          <NavLink to="/user/photos" className="nav-link">
             <Icon icon="image" />
           </NavLink>
         </li>
+        {/* <li className="nav-item">
+          <NavLink to="/user/git-profile" className="nav-link">
+            Git
+          </NavLink>
+        </li> */}
       </ul>
     </nav>
   );

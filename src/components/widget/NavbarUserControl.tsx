@@ -35,7 +35,9 @@ const NavbarUserControl = () => {
         <Dropdown.Item icon="user">Profile</Dropdown.Item>
         <Dropdown.Item icon="cog">Settings</Dropdown.Item>
         <Divider />
-        <Dropdown.Item icon="sign-out">Signout</Dropdown.Item>
+        <Dropdown.Item icon="sign-out" link to="/signout">
+          Signout
+        </Dropdown.Item>
       </Dropdown>
     </div>
   );

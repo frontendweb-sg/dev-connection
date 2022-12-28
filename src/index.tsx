@@ -8,6 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import "./lib/icons";
 import "./index.scss";
+import Loading from "./components/Loading";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -17,7 +18,7 @@ root.render(
   <React.StrictMode>
     <Provider store={Store}>
       <BrowserRouter>
-        <Suspense fallback={<h1>Loading...</h1>}>
+        <Suspense fallback={<Loading />}>
           <AuthProvider>
             <App />
           </AuthProvider>

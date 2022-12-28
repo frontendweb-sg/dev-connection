@@ -1,4 +1,5 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
+import { faGit } from "@fortawesome/free-brands-svg-icons";
 import {
   faEnvelope,
   faEye,
@@ -42,5 +43,6 @@ library.add(
   faUser,
   faSignOut,
   faCog,
-  faImage
+  faImage,
+  faGit
 );

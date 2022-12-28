@@ -1,12 +1,13 @@
 import { lazy } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { AppRoutes } from "../util/AppRoutes";
 
-const Home = lazy(() => import("../pages/Home"));
+//const Home = lazy(() => import("../pages/Home"));
 const About = lazy(() => import("../pages/About"));
 const Contact = lazy(() => import("../pages/Contact"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 
+const Signout = lazy(() => import("../auth/Signout"));
 const Auth = lazy(() => import("../auth"));
 const Signin = lazy(() => import("../auth/Signin"));
 const Signup = lazy(() => import("../auth/Signup"));
@@ -24,6 +25,7 @@ const Users = lazy(() => import("../admin/Users"));
 
 const User = lazy(() => import("../user"));
 const UserDashboard = lazy(() => import("../user/Dashboard"));
+const UserFriends = lazy(() => import("../user/Friends"));
 const UserProfile = lazy(() => import("../user/Profile"));
 const UserSetting = lazy(() => import("../user/Setting"));
 const UserPosts = lazy(() => import("../user/Posts"));
@@ -37,10 +39,12 @@ const Routers = () => {
   return (
     <Routes>
       <Route path={AppRoutes.root}>
-        <Route index element={<Home />} />
+        {/* <Route index element={<Home />} /> */}
+        <Route path="/" element={<Navigate to="auth" />} />
         <Route path={AppRoutes.about} element={<About />} />
         <Route path={AppRoutes.contact} element={<Contact />} />
         <Route path={AppRoutes.developers} element={<Developers />} />
+        <Route path={AppRoutes.authSignout} element={<Signout />} />
 
         {/* Auth  */}
         <Route path={AppRoutes.auth} element={<Auth />}>
@@ -63,6 +67,7 @@ const Routers = () => {
         <Route path={AppRoutes.user} element={<User />}>
           <Route index element={<UserDashboard />} />
           <Route path={AppRoutes.userPosts} element={<UserPosts />} />
+          <Route path={AppRoutes.userFriends} element={<UserFriends />} />
           <Route path={AppRoutes.userPhotos} element={<UserPhotos />} />
           <Route path={AppRoutes.userVideos} element={<UserVideos />} />
           <Route path={AppRoutes.userProfile} element={<UserProfile />} />
