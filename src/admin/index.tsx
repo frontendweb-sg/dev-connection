@@ -6,6 +6,7 @@ import Box from "../components/Box";
 import Footer from "../layout/Footer";
 import Header from "./layout/Header";
 import Sidebar from "./layout/Sidebar";
+import PageTitle from "../components/PageTitle";
 
 /**
  * Admin layout component
@@ -28,6 +29,7 @@ const Admin = () => {
       <Box className="wrapper">
         <Header onToggle={onToggle} />
         <Box className="content-section">
+          <PageTitle />
           <Outlet />
         </Box>
         <Footer />
