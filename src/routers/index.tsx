@@ -66,7 +66,7 @@ const Routers = () => {
         {/* Admin */}
         <Route path={AppRoutes.admin} element={<Admin />}>
           <Route index element={<AdminDashboard />} />
-          <Route path="categories" element={<AdminUsers />} />
+          <Route path="categories" element={<AdminCategory />} />
           <Route path="designations" element={<AdminDesignation />} />
           <Route path="skills" element={<AdminSkills />} />
           <Route path="posts" element={<AdminPosts />} />

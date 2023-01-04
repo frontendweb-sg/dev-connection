@@ -23,7 +23,8 @@ import {
   faImage,
   faList,
   faBars,
-  faTh,
+  faDashboard,
+  faArrowRight,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -49,5 +50,6 @@ library.add(
   faImage,
   faBars,
   faList,
-  faTh
+  faDashboard,
+  faArrowRight
 );

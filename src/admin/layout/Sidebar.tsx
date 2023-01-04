@@ -1,3 +1,4 @@
+import { IconName } from "@fortawesome/fontawesome-common-types";
 import Box from "../../components/Box";
 import NavMenu from "../../components/NavMenu";
 import Logo from "../../layout/Logo";
@@ -17,7 +18,12 @@ const Sidebar = () => {
             <span>Menu</span>
           </li>
           {SIDEBAR_MENU.map((menu, index) => (
-            <NavMenu type="menu" to={menu.href} key={index}>
+            <NavMenu
+              icon={menu.icon! as IconName}
+              type="menu"
+              to={menu.href}
+              key={index}
+            >
               {menu.label}
             </NavMenu>
           ))}

@@ -1,32 +1,32 @@
 export const SIDEBAR_MENU = [
   {
     label: "Dashboard",
-    icon: "th",
-    href: "/admin",
+    icon: "dashboard",
+    href: "/",
   },
   {
-    label: "Category",
-    icon: "th",
+    label: "Categories",
+    icon: "arrow-right",
     href: "/admin/categories",
   },
   {
     label: "Designation",
-    icon: "th",
+    icon: "arrow-right",
     href: "/admin/designations",
   },
   {
     label: "Skills",
-    icon: "th",
+    icon: "arrow-right",
     href: "/admin/skills",
   },
   {
     label: "Users",
-    icon: "th",
+    icon: "users",
     href: "/admin/users",
   },
   {
     label: "Posts",
-    icon: "th",
+    icon: "arrow-right",
     href: "/admin/posts",
   },
 ];
