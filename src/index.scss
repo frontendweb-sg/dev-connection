@@ -1,12 +1,13 @@
 @import "./styles/settings/variables";
 @import "bootstrap/scss/bootstrap.scss";
-
+@import "./styles/settings/mixins";
 
 @import "./styles/base/init";
 @import "./styles/layout/wrapper";
 @import "./styles/layout/navbar";
 @import "./styles/layout/logo";
 @import "./styles/layout/footer";
+@import "./styles/layout/sidebar";
 
 
 @import "./styles/components/loading";
@@ -14,9 +15,9 @@
 @import "./styles/components/post";
 @import "./styles/components/dropdown";
 @import "./styles/components/alert";
+@import "./styles/components/panel";
 
-
-@import "./styles/form/input";
+@import "./styles/form/input"; 
 @import "./styles/form/button";
 
 @import "./styles/pages/auth";

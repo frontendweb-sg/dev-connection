@@ -1,16 +1,18 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import Box from "../components/Box";
 import { useAddClass } from "../hooks/useAddClass";
 import { useAuth } from "../hooks/useAuth";
-import AdminSidebar from "../layout/AdminSidbar";
+import { useToggle } from "../hooks/useToggle";
+import Box from "../components/Box";
 import Footer from "../layout/Footer";
-import Header from "../layout/Header";
+import Header from "./layout/Header";
+import Sidebar from "./layout/Sidebar";
 
 /**
  * Admin layout component
  * @returns
  */
 const Admin = () => {
+  const { onToggle, open } = useToggle();
   useAddClass("root-admin");
 
   const location = useLocation();
@@ -22,9 +24,9 @@ const Admin = () => {
 
   return (
     <>
-      <AdminSidebar />
+      <Sidebar />
       <Box className="wrapper">
-        <Header />
+        <Header onToggle={onToggle} />
         <Box className="content-section">
           <Outlet />
         </Box>

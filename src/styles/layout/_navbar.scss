@@ -5,8 +5,8 @@
   --shadow: #{$navbar-shadow};
   transition: all 300ms linear;
   height: var(--height);
-  background-color: var(--light-bg);
   &-private{
+    background-color: var(--light-bg);
     border-bottom: 1px solid $gray-200;
   }
 
@@ -22,4 +22,18 @@
       }
     }
   }
+
+  &-brand{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include nested(".sidebar-admin"){
+     color:$white ;
+     padding:20px;
+     min-height: $navbar-height;
+    }
+  }
+
+
 }

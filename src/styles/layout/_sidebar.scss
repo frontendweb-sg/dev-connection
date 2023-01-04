@@ -1,0 +1,51 @@
+.sidebar {
+  --width: #{$sidebar-width};
+  &-admin {
+    transition: width 500ms linear;
+    position: fixed;
+    height: 100%;
+    color:$white;
+    background-color: $primary;
+    width: var(--width);
+  }
+
+  .nav{
+    &-item{
+      padding:0 15px;
+    }
+    &-link{
+      padding:10px;
+      border-radius: 5px;
+      &:hover,
+      &.active{
+        background-color:  lighten($primary,14%);
+      }
+    }
+   &-header{
+    color: $gray-300;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-size: $font-size-base - 0.2rem;
+    position: relative;
+    z-index: 1;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    span{
+      background-color: $primary;
+      margin-left: 30px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    &:before{
+      z-index: -1;
+      content:'';
+      width:100%;
+      height:1px;
+      position: absolute;
+      top:50%;
+      transform: translateY(-50%);
+      background-color: lighten($primary,14%);
+    }
+  }
+  }
+}

@@ -19,3 +19,12 @@
     background-color: $gray-100;
   }
 }
+
+.form-textarea{
+  padding:0;
+  textarea{padding:10px; border:0;width: 100%; border-radius: 5px;
+  &:focus{
+    border:none;
+    outline:none
+  }}
+}

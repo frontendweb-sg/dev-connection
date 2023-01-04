@@ -18,10 +18,16 @@ const Developers = lazy(() => import("../pages/Developers"));
 
 // admin
 const Admin = lazy(() => import("../admin"));
-const Dashboard = lazy(() => import("../admin/Dashboard"));
+const AdminDashboard = lazy(() => import("../admin/Dashboard"));
+const AdminCategory = lazy(() => import("../admin/Categories"));
+const AdminDesignation = lazy(() => import("../admin/Designations"));
+const AdminSkills = lazy(() => import("../admin/Skills"));
+const AdminPosts = lazy(() => import("../admin/Posts"));
+const AdminUsers = lazy(() => import("../admin/Users"));
+const AdminProfile = lazy(() => import("../admin/Profile"));
+const AdminSettings = lazy(() => import("../admin/Settings"));
 
 // users
-const Users = lazy(() => import("../admin/Users"));
 
 const User = lazy(() => import("../user"));
 const UserDashboard = lazy(() => import("../user/Dashboard"));
@@ -59,8 +65,14 @@ const Routers = () => {
 
         {/* Admin */}
         <Route path={AppRoutes.admin} element={<Admin />}>
-          <Route index element={<Dashboard />} />
-          <Route path="users" element={<Users />} />
+          <Route index element={<AdminDashboard />} />
+          <Route path="categories" element={<AdminUsers />} />
+          <Route path="designations" element={<AdminDesignation />} />
+          <Route path="skills" element={<AdminSkills />} />
+          <Route path="posts" element={<AdminPosts />} />
+          <Route path="users" element={<AdminUsers />} />
+          <Route path="profile" element={<AdminProfile />} />
+          <Route path="settings" element={<AdminSettings />} />
         </Route>
 
         {/* User */}

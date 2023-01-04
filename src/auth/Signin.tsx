@@ -30,8 +30,8 @@ const Signin = () => {
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
-        email: "pkumar2@pythian.com",
-        password: "Admin$1234@",
+        email: "arya.creativemind@gmail.com",
+        password: "Admin$12345@",
       },
       validationSchema: validation,
       onSubmit: (values: IValues) => {

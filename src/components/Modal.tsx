@@ -36,27 +36,30 @@ const Modal = forwardRef<ModalRef, IModalProps>((props: IModalProps, ref) => {
   const classes = classNames("modal fade", open && "show");
 
   return (
-    <Box
-      ref={refs!}
-      className={classes}
-      style={{ display: open ? "block" : "none" }}
-    >
-      <Box className="modal-dialog">
-        <Box className="modal-content">
-          <Box className="modal-header">
-            <Typography variant="h6">{label}</Typography>
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-              onClick={onClose}
-            ></button>
+    <>
+      <Box
+        ref={refs!}
+        className={classes}
+        style={{ display: open ? "block" : "none" }}
+      >
+        <Box className="modal-dialog modal-dialog-centered">
+          <Box className="modal-content">
+            <Box className="modal-header">
+              <Typography variant="h6">{label}</Typography>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                onClick={onClose}
+              ></button>
+            </Box>
+            <Box className="modal-body">{children}</Box>
           </Box>
-          <Box className="modal-body">{children}</Box>
         </Box>
       </Box>
-    </Box>
+      {open && <Box className={classNames("modal-backdrop fade show")}></Box>}
+    </>
   );
 });
 

@@ -21,6 +21,9 @@ import {
   faSignOut,
   faCog,
   faImage,
+  faList,
+  faBars,
+  faTh,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -44,5 +47,7 @@ library.add(
   faSignOut,
   faCog,
   faImage,
-  faGit
+  faBars,
+  faList,
+  faTh
 );

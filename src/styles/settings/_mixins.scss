@@ -1,0 +1,5 @@
+@mixin nested($parent){
+  @at-root #{$parent} & {
+    @content;
+  }
+}

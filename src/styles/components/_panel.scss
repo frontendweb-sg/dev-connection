@@ -1,0 +1,13 @@
+.panel{
+  padding:20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  box-shadow: $box-shadow;
+
+  &-white{
+    background-color: $white;
+  }
+  &-gray{
+    background-color: $gray-100;
+  }
+}

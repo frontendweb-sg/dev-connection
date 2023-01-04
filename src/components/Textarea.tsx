@@ -18,7 +18,7 @@ export type TextareaRef = HTMLTextAreaElement;
  */
 const Textarea = forwardRef<TextareaRef, ITextareaProps>(
   ({ name, value, className, ...rest }: ITextareaProps, ref) => {
-    const classes = classNames("form-control", className);
+    const classes = classNames("form-textarea", className);
     return (
       <Box className={classes}>
         <textarea name={name} value={value} ref={ref} {...rest}></textarea>
