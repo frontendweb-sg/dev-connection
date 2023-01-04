@@ -1,7 +1,12 @@
 import { forwardRef } from "react";
 import classNames from "classnames";
+
+type Justify = "start" | "center" | "end" | "between";
+
 export interface IBoxProps
-  extends React.HtmlHTMLAttributes<HTMLDivElement | HTMLElement> {}
+  extends React.HtmlHTMLAttributes<HTMLDivElement | HTMLElement> {
+  justify?: Justify;
+}
 export type BoxRef = HTMLDivElement;
 
 /**

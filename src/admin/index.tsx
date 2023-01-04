@@ -29,7 +29,6 @@ const Admin = () => {
       <Box className="wrapper">
         <Header onToggle={onToggle} />
         <Box className="content-section">
-          <PageTitle />
           <Outlet />
         </Box>
         <Footer />

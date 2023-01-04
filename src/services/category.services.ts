@@ -8,7 +8,7 @@ export interface ICategory {
   _id?: string;
   title: string;
   description: string;
-  active: string;
+  active?: string;
 }
 
 class CategoryServices implements IServices<ICategory> {

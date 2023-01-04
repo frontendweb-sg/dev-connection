@@ -35,6 +35,7 @@ const Button: FC<IButtonProps> = ({
   loading,
   disabled,
   block,
+  type,
   ...rest
 }) => {
   let classes = classNames(
@@ -71,7 +72,12 @@ const Button: FC<IButtonProps> = ({
     );
 
   return (
-    <button className={classes} disabled={disabled || loading} {...rest}>
+    <button
+      type={type}
+      className={classes}
+      disabled={disabled || loading}
+      {...rest}
+    >
       {loading ? <Icon icon="spinner" spin className="me-2" /> : null}
       {startIcon && !loading ? (
         <Icon icon={startIcon} className="me-2" />
@@ -86,6 +92,7 @@ Button.defaultProps = {
   color: "primary",
   size: "md",
   variant: "filled",
+  type: "button",
 };
 
 export default Button;

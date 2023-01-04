@@ -18,11 +18,13 @@ body {
 }
 
 .root{
-  &-user{
+  &-user,
+  &-admin{
     background-color: #eff2f6;
   }
 
   &-admin{
+
     .wrapper{
       flex:1;
       display: flex;

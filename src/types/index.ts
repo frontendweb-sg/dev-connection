@@ -3,6 +3,7 @@ import { ReactElement, ReactNode } from "react";
 
 type TFlex = "flex" | "flex-inline";
 type FlexDirection = "column" | "row";
+export type TableVariant = "border" | "striped" | "hover";
 export type Direction = "left" | "right" | "center";
 export type Align = "left" | "right" | "center" | "justify";
 export type Theme = "light" | "dark";

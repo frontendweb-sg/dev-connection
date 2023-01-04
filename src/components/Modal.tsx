@@ -45,7 +45,9 @@ const Modal = forwardRef<ModalRef, IModalProps>((props: IModalProps, ref) => {
         <Box className="modal-dialog modal-dialog-centered">
           <Box className="modal-content">
             <Box className="modal-header">
-              <Typography variant="h6">{label}</Typography>
+              <Typography className="mb-0" variant="h6">
+                {label}
+              </Typography>
               <button
                 type="button"
                 className="btn-close"
