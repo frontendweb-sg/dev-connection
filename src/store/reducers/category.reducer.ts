@@ -32,6 +32,12 @@ const slice = createSlice({
       })
       .addCase(addCategory.pending, (state) => {
         state.status = "loading";
+      })
+      .addCase(addCategory.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(addCategory.fulfilled, (state, action) => {
+        state.categories.push(action.payload);
       });
   },
 });

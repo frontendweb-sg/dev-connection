@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { categoryService, ICategory } from "../../services/category.services";
 import { SliceStatus } from "../../types";
+import { alertShow } from "../reducers/alert.reducer";
 
 interface ICategoryState {
   status: SliceStatus;
@@ -18,7 +19,16 @@ const fetchCategory = createAsyncThunk("category/getAll", async () => {
 
 /**
  * Add category */
-const addCategory = createAsyncThunk("category/add", async () => {});
+const addCategory = createAsyncThunk(
+  "category/add",
+  async (body: ICategory, { dispatch }) => {
+    const { status, data } = await categoryService.create(body);
+    if (status === 201) {
+      dispatch(alertShow({ message: "Category added" }));
+    }
+    return data;
+  }
+);
 
 /**
  * Update Category */
