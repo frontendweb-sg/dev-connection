@@ -6,14 +6,13 @@ import Box from "../components/Box";
 import Footer from "../layout/Footer";
 import Header from "./layout/Header";
 import Sidebar from "./layout/Sidebar";
-import PageTitle from "../components/PageTitle";
 
 /**
  * Admin layout component
  * @returns
  */
 const Admin = () => {
-  const { onToggle, open } = useToggle();
+  const { onToggle } = useToggle();
   useAddClass("root-admin");
 
   const location = useLocation();

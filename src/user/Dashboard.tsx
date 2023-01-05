@@ -8,6 +8,7 @@ import AddPost from "../components/widget/AddPost";
  * @returns
  */
 const Dashbaord = () => {
+  console.log("hi");
   return (
     <>
       <Row>

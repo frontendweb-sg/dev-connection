@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import "./lib/icons";
 import "./index.scss";
 import Loading from "./components/Loading";
+import ConfirmProvider from "./context/Confirmation";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -20,7 +21,9 @@ root.render(
       <BrowserRouter>
         <Suspense fallback={<Loading />}>
           <AuthProvider>
-            <App />
+            <ConfirmProvider>
+              <App />
+            </ConfirmProvider>
           </AuthProvider>
         </Suspense>
       </BrowserRouter>

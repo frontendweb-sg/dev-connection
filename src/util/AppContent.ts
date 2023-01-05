@@ -7,6 +7,8 @@ export const AppContent = {
   activeText: "Active",
   inactiveText: "Inactive",
   editText: "Edit",
+  yesText: "Yes",
+  okText: "Ok",
   message: {
     add: "Record addedd successfully!",
     update: "Record updated successfully!",

@@ -1,22 +1,22 @@
-import { useEffect, useRef } from "react";
 import Button from "../../components/Button";
 import Grid from "../../components/Grid";
-import Modal, { ModalRef } from "../../components/Modal";
 import PageTitle from "../../components/PageTitle";
+import CategoryForm from "./CategoryForm";
+import Modal, { ModalRef } from "../../components/Modal";
+import { useEffect, useRef } from "react";
+import { useConfirm } from "../../context/Confirmation";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { useEditing } from "../../hooks/useEditing";
-import { ICategory } from "../../services/category.services";
-
 import { fetchCategory } from "../../store/actions/category.action";
 import { selectCategory } from "../../store/reducers/category.reducer";
 import { ActionStatus } from "../../types";
 import { AppContent } from "../../util/AppContent";
-import CategoryForm from "./CategoryForm";
 
 const Categories = () => {
   const catRef = useRef<ModalRef>(null);
   const dispatch = useAppDispatch();
   const { categories, status } = useAppSelector(selectCategory);
+  const { onConfirm } = useConfirm();
 
   // editing
   const { editData, onEditHandler } = useEditing({ data: categories });
@@ -33,7 +33,7 @@ const Categories = () => {
         onEditHandler(data);
         break;
       case "delete":
-        
+        onConfirm?.({ open: true });
         break;
       default:
         new Error("Worng action");
