@@ -13,19 +13,7 @@ const initialState: IAlert = {
 const alertSlice = createSlice({
   name: "alert",
   initialState,
-  reducers: {
-    // alertShow: (state: IAlert, action: PayloadAction<IAlert>) => {
-    //   const { payload } = action;
-    //   state.visible = true;
-    //   state.message = payload.message;
-    //   state.color = payload.color;
-    //   state.size = payload.size;
-    // },
-    // alertHide: (state: IAlert) => {
-    //   state.visible = false;
-    //   state.message = "";
-    // },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(alertShow.fulfilled, (state, action: PayloadAction<IAlert>) => {
@@ -42,5 +30,6 @@ const alertSlice = createSlice({
   },
 });
 
+export const ALERT_REDUCER_NAME = "alert";
 export const alertState = (state: RootState) => state.alert;
 export default alertSlice.reducer;

@@ -54,6 +54,7 @@ const Categories = () => {
     }
   }, [status, dispatch]);
 
+  console.log(editData);
   return (
     <>
       <PageTitle className="title-page">

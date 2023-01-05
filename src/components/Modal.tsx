@@ -35,7 +35,7 @@ const Modal = forwardRef<ModalRef, IModalProps>((props: IModalProps, ref) => {
 
   const classes = classNames("modal fade", open && "show");
 
-  return (
+  return open ? (
     <>
       <Box
         ref={refs!}
@@ -62,7 +62,7 @@ const Modal = forwardRef<ModalRef, IModalProps>((props: IModalProps, ref) => {
       </Box>
       {open && <Box className={classNames("modal-backdrop fade show")}></Box>}
     </>
-  );
+  ) : null;
 });
 
 export default memo(Modal);

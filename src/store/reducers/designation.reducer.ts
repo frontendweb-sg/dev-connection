@@ -64,5 +64,6 @@ const slice = createSlice({
   },
 });
 
-export const selectCategory = (state: RootState) => state.category;
+export const DESIGNATION_REDUCER_NAME = "designation";
+export const selectDesignation = (state: RootState) => state.designation;
 export default slice.reducer;

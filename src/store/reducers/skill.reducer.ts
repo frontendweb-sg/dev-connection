@@ -64,5 +64,6 @@ const slice = createSlice({
   },
 });
 
+export const SKILL_REDUCER_NAME = "skill";
 export const selectCategory = (state: RootState) => state.category;
 export default slice.reducer;

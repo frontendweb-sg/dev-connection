@@ -17,8 +17,13 @@ export function useEditing<T extends { _id?: string }>({
     setEditData(record!);
   };
 
+  const onCancelEditing = () => {
+    setEditData(null);
+  };
+
   return {
     editData,
     onEditHandler,
+    onCancelEditing,
   };
 }
