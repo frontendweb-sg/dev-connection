@@ -26,29 +26,38 @@ const slice = createSlice({
       .addCase(fetchCategory.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchCategory.fulfilled, (state, action) => {
-        state.categories = action.payload!;
+      .addCase(fetchCategory.fulfilled, (state, { payload }) => {
+        state.categories = payload!;
         state.status = "succeeded";
       })
       .addCase(addCategory.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(addCategory.fulfilled, (state, action) => {
-        state.categories.push(action.payload);
+      .addCase(addCategory.fulfilled, (state, { payload }) => {
+        state.categories.push(payload);
         state.status = "succeeded";
       })
-      .addCase(updateCategory.pending, (state, action) => {
+      .addCase(updateCategory.pending, (state) => {
         state.status = "loading";
       })
       .addCase(
         updateCategory.fulfilled,
-        (state, action: PayloadAction<ICategory>) => {
+        (state, { payload }: PayloadAction<ICategory>) => {
           state.categories = state.categories.map((row) =>
-            row._id === action.payload._id ? { ...row, ...action.payload } : row
+            row._id === payload._id ? { ...row, ...payload } : row
           );
           state.status = "succeeded";
         }
-      );
+      )
+      .addCase(deleteCategory.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deleteCategory.fulfilled, (state, { payload }) => {
+        state.categories = state.categories.filter(
+          (item) => item._id !== payload._id
+        );
+        state.status = "succeeded";
+      });
   },
 });
 

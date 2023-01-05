@@ -7,7 +7,10 @@ import { useEffect, useRef } from "react";
 import { useConfirm } from "../../context/Confirmation";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { useEditing } from "../../hooks/useEditing";
-import { fetchCategory } from "../../store/actions/category.action";
+import {
+  deleteCategory,
+  fetchCategory,
+} from "../../store/actions/category.action";
 import { selectCategory } from "../../store/reducers/category.reducer";
 import { ActionStatus } from "../../types";
 import { AppContent } from "../../util/AppContent";
@@ -33,7 +36,10 @@ const Categories = () => {
         onEditHandler(data);
         break;
       case "delete":
-        onConfirm?.({ open: true });
+        onConfirm?.({
+          open: true,
+          onAction: () => dispatch(deleteCategory(data._id)),
+        });
         break;
       default:
         new Error("Worng action");
