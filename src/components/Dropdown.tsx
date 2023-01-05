@@ -86,13 +86,21 @@ const DropdownButton = (props: IDropdownButtonProps) => {
 };
 
 const DropdownItem = (props: IDropdownItemProps) => {
-  const { link, to, icon, className, children, ...rest } = props;
+  const { onClick, to, icon, className, children, ...rest } = props;
   const classes = classNames("dropdown-item", className);
-  if (link) {
+  if (to) {
     return (
       <Link to={to!} className={classes} {...rest}>
         {icon && <Icon icon={icon} />} {children}
       </Link>
+    );
+  }
+
+  if (onClick) {
+    return (
+      <Button onClick={onClick!} className={classes}>
+        {icon && <Icon icon={icon} />} {children}
+      </Button>
     );
   }
 

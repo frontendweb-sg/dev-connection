@@ -33,12 +33,22 @@ const slice = createSlice({
       .addCase(addCategory.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(addCategory.pending, (state) => {
-        state.status = "loading";
-      })
       .addCase(addCategory.fulfilled, (state, action) => {
         state.categories.push(action.payload);
-      });
+        state.status = "succeeded";
+      })
+      .addCase(updateCategory.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(
+        updateCategory.fulfilled,
+        (state, action: PayloadAction<ICategory>) => {
+          state.categories = state.categories.map((row) =>
+            row._id === action.payload._id ? { ...row, ...action.payload } : row
+          );
+          state.status = "succeeded";
+        }
+      );
   },
 });
 

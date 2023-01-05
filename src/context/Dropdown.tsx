@@ -36,9 +36,9 @@ export type IDropdownButtonProps = {
 export type IDropdownItemProps = React.HtmlHTMLAttributes<
   HTMLAnchorElement | HTMLDivElement
 > & {
-  link?: boolean;
   to?: To;
   icon?: IconName;
+  onClick?: () => void;
 };
 
 export const DropdownContext = createContext({} as IDropdownContext);

@@ -9,6 +9,7 @@ export type Align = "left" | "right" | "center" | "justify";
 export type Theme = "light" | "dark";
 export type Size = "xs" | "sm" | "md" | "lg" | "xl" | "xxl" | "block";
 export type SliceStatus = "idle" | "loading" | "succeeded" | "failed";
+export type ActionStatus = "edit" | "active" | "inactive" | "delete";
 export type Color =
   | "white"
   | "info"

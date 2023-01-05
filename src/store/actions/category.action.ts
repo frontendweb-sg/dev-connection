@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { categoryService, ICategory } from "../../services/category.services";
 import { SliceStatus } from "../../types";
-import { alertShow } from "../reducers/alert.reducer";
+import { AppContent } from "../../util/AppContent";
+import { alertShow } from "../actions/alert.action";
 
 interface ICategoryState {
   status: SliceStatus;
@@ -24,7 +25,9 @@ const addCategory = createAsyncThunk(
   async (body: ICategory, { dispatch }) => {
     const { status, data } = await categoryService.create(body);
     if (status === 201) {
-      dispatch(alertShow({ message: "Category added" }));
+      dispatch(
+        alertShow({ message: AppContent.message.add, color: "success" })
+      );
     }
     return data;
   }
@@ -34,15 +37,31 @@ const addCategory = createAsyncThunk(
  * Update Category */
 const updateCategory = createAsyncThunk(
   "category/update",
-  async (body: ICategory) => {
-    const response = await categoryService.update(body);
-    return response;
+  async (body: ICategory, { dispatch }) => {
+    const { status, data } = await categoryService.update(body);
+    if (status === 200) {
+      dispatch(
+        alertShow({ message: AppContent.message.update, color: "success" })
+      );
+    }
+    return data;
   }
 );
 
 /**
  * Delete category */
-const deleteCategory = createAsyncThunk("category/deleted", async () => {});
+const deleteCategory = createAsyncThunk(
+  "category/deleted",
+  async (id: string, { dispatch }) => {
+    const { status, data } = await categoryService.deleted(id);
+    if (status === 200) {
+      dispatch(
+        alertShow({ message: AppContent.message.delete, color: "success" })
+      );
+    }
+    return data;
+  }
+);
 
 export {
   fetchCategory,

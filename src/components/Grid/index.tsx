@@ -1,7 +1,8 @@
 import { upperFirst } from "lodash";
 import { memo } from "react";
-import { Color, Size, TableVariant } from "../../types";
+import { ActionStatus, Color, Size, TableVariant } from "../../types";
 import Table from "./Table";
+import TableAction from "./TableAction";
 import TableCell from "./TableCell";
 import TableRow from "./TableRow";
 
@@ -12,6 +13,13 @@ type GridProps<T> = {
   variant?: TableVariant;
   color?: Color;
   size?: Size;
+  settings?: {
+    active: true;
+    inactive: true;
+    editing: true;
+    deleting: true;
+  };
+  onAction?: (type: ActionStatus, body: T) => void;
 };
 
 const Grid = <T extends unknown>({
@@ -21,27 +29,41 @@ const Grid = <T extends unknown>({
   variant,
   color,
   size,
+  onAction,
   ...rest
 }: GridProps<T>) => {
   const firstRow = data[0] ?? {};
-  const keys = Object.keys(firstRow);
+  const columns = Object.keys(firstRow);
+  const transformColumns = columns.filter(
+    (item: string) => !hideColumns?.includes(item)
+  );
 
-  return (
-    <Table variant={variant} color={color} size={size} {...rest}>
-      <TableHeader cols={keys} />
+  let element;
+  if (data.length > 0) {
+    element = (
       <tbody>
         {data.map((row: any, index) => {
           return (
             <TableRow key={index}>
-              {keys.map((col, index) => (
+              {transformColumns.map((col, index) => (
                 <TableCell key={col + "_" + index} tag="td">
                   {row[col]}
                 </TableCell>
               ))}
+              <TableAction
+                onAction={(status, value) => onAction?.(status, value)}
+                data={row}
+              />
             </TableRow>
           );
         })}
       </tbody>
+    );
+  }
+  return (
+    <Table variant={variant} color={color} size={size} {...rest}>
+      <TableHeader cols={[...transformColumns, "Action"]} />
+      {element}
     </Table>
   );
 };

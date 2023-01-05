@@ -8,7 +8,7 @@ import {
   IAuthSignup,
   IUser,
 } from "../services/auth.services";
-import { alertShow } from "../store/reducers/alert.reducer";
+import { alertShow } from "../store/actions/alert.action";
 import { RootProps } from "../types";
 
 interface IAuthState {

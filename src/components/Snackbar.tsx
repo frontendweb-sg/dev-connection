@@ -1,8 +1,9 @@
 import Box from "./Box";
 import classNames from "classnames";
-import { alertState, alertHide } from "../store/reducers/alert.reducer";
 import { FC } from "react";
 import { useAppDispatch, useAppSelector } from "../hook";
+import { alertHide } from "../store/actions/alert.action";
+import { alertState } from "../store/reducers/alert.reducer";
 
 interface IAlertProps extends React.HtmlHTMLAttributes<HTMLDivElement> {}
 
