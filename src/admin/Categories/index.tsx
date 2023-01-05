@@ -33,6 +33,7 @@ const Categories = () => {
         onEditHandler(data);
         break;
       case "delete":
+        
         break;
       default:
         new Error("Worng action");
