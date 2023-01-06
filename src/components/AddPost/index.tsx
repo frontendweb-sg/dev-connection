@@ -72,12 +72,18 @@ const AddPost = () => {
               name="category"
               startIcon="home"
               options={[1, 2, 3, 4, 5, 6]}
+              renderProps={(value: number) => {
+                return value;
+              }}
             />
             <Select
               label="Hello world"
               name="category"
               startIcon="home"
               options={["html", "css"]}
+              renderProps={(value: string) => {
+                return value;
+              }}
             />
             <Select
               name="category"

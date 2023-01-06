@@ -74,7 +74,7 @@ const Select = <T extends unknown>({
 
   const optionsEl = options.map((item: any) =>
     renderProps ? (
-      renderProps(item)
+      <option key={item}>{renderProps(item)}</option>
     ) : ["string", "number"].includes(typeof item) ? (
       <option value={item} key={item}>
         {item}
