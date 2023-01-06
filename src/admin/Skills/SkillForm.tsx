@@ -7,36 +7,30 @@ import Button from "../../components/Button";
 import Box from "../../components/Box";
 import * as Yup from "yup";
 import { useAppDispatch } from "../../hook";
-import {
-  addDesignation,
-  updateDesignation,
-} from "../../store/actions/designation.action";
-import {
-  designationService,
-  IDesignation,
-} from "../../services/designation.services";
+import { skillService, ISkill } from "../../services/skill.services";
+import { addSkill, updateSkill } from "../../store/actions/skill.action";
 
 const validation = Yup.object().shape({
-  title: Yup.string().required("Designation is required!"),
+  title: Yup.string().required("Skill is required!"),
   description: Yup.string(),
 });
 
-type DesignationFormProps<T> = React.FormHTMLAttributes<HTMLFormElement> & {
+type SkillFormProps<T> = React.FormHTMLAttributes<HTMLFormElement> & {
   data: T;
   onClose?: () => void;
   loading?: boolean;
 };
 
 /**
- * Category form component
+ * Skill form component
  * @returns
  */
-const DesignationForm = <T extends { _id?: string }>({
+const SkillForm = <T extends { _id?: string }>({
   onClose,
   loading,
   data,
   ...rest
-}: DesignationFormProps<T>) => {
+}: SkillFormProps<T>) => {
   const dispatch = useAppDispatch();
 
   const {
@@ -48,14 +42,14 @@ const DesignationForm = <T extends { _id?: string }>({
     handleChange,
     handleSubmit,
   } = useFormik({
-    initialValues: designationService.getObject(),
+    initialValues: skillService.getObject(),
     validationSchema: validation,
-    onSubmit: (values: IDesignation) => {
+    onSubmit: (values: ISkill) => {
       onClose?.();
       if (values._id) {
-        dispatch(updateDesignation(values));
+        dispatch(updateSkill(values));
       } else {
-        dispatch(addDesignation(values));
+        dispatch(addSkill(values));
       }
     },
   });
@@ -66,7 +60,6 @@ const DesignationForm = <T extends { _id?: string }>({
     }
   }, [data, setValues]);
 
-  console.log("hi", values);
   return (
     <Form onSubmit={handleSubmit} {...rest}>
       <Input
@@ -76,7 +69,7 @@ const DesignationForm = <T extends { _id?: string }>({
         touched={touched}
         onChange={handleChange}
         onBlur={handleBlur}
-        placeholder="Designation name"
+        placeholder="Skill name"
       />
       <Box className="d-flex align-items-center justify-content-end mt-2">
         <Button onClick={onClose} className="me-2">
@@ -90,4 +83,4 @@ const DesignationForm = <T extends { _id?: string }>({
   );
 };
 
-export default memo(DesignationForm);
+export default memo(SkillForm);
