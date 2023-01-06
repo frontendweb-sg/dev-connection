@@ -18,6 +18,7 @@ import { useFocus } from "../../hooks/useFocus";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { fetchCategory } from "../../store/actions/category.action";
 import { selectCategory } from "../../store/reducers/category.reducer";
+import IconButton from "../IconButton";
 
 /**
  * Add post component
@@ -42,18 +43,17 @@ const AddPost = () => {
     if (status === "idle") dispatch(fetchCategory());
   }, [dispatch, status]);
 
-  console.log("state", categories);
   return (
-    <Panel>
+    <>
       <Typography className="mb-3" variant="h6">
         Create Post
       </Typography>
       <Form onSubmit={handleSubmit}>
         <Row>
-          <Col sm={1}>
+          <Col sm={2}>
             <Avatar size="sm" />
           </Col>
-          <Col sm={11}>
+          <Col sm={10}>
             <Select
               options={categories}
               name="category"
@@ -72,12 +72,23 @@ const AddPost = () => {
               autoFocus
             />
           </Col>
+
           <Col sm={12} className="justify-content-end d-flex mt-2">
-            <Button type="submit">Save</Button>
+            <Row>
+              <Col>
+                <IconButton icon="camera" />
+                <IconButton icon="video" />
+                <IconButton icon="calendar" />
+                <IconButton icon="code" />
+              </Col>
+              <Col>
+                <Button type="submit">Save</Button>
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Form>
-    </Panel>
+    </>
   );
 };
 

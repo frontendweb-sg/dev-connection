@@ -26,6 +26,10 @@ import {
   faDashboard,
   faArrowRight,
   faSpinner,
+  faCamera,
+  faVideo,
+  faCalendar,
+  faCode,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -53,5 +57,9 @@ library.add(
   faList,
   faDashboard,
   faArrowRight,
-  faSpinner
+  faSpinner,
+  faCamera,
+  faVideo,
+  faCalendar,
+  faCode
 );

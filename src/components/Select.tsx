@@ -24,7 +24,9 @@ const Select = <T extends unknown>({
         renderProps ? (
           renderProps(item)
         ) : (
-          <option id={item?.id}>{keyName ? item[keyName] : item?.label}</option>
+          <option key={item._id} id={item?._id}>
+            {keyName ? item[keyName] : item?.title}
+          </option>
         )
       )}
     </select>
