@@ -34,7 +34,6 @@ export interface AppProps extends RootProps {
 
 export interface IServices<T> {
   getAll(): Promise<AxiosResponse<T[]>>;
-  getById(id: string): Promise<AxiosResponse<T>>;
   create(body: T): Promise<AxiosResponse<T>>;
   update(body: T): Promise<AxiosResponse<T>>;
   deleted(id: string): Promise<AxiosResponse<T>>;

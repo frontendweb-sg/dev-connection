@@ -6,6 +6,7 @@ import categoryReducer, {
 import designationReducer, {
   DESIGNATION_REDUCER_NAME,
 } from "./reducers/designation.reducer";
+import postReducer, { POST_REDUCER_NAME } from "./reducers/post.reducer";
 import skillReducer, { SKILL_REDUCER_NAME } from "./reducers/skill.reducer";
 
 /**
@@ -18,6 +19,7 @@ const Store = configureStore({
     [CATEGORY_REDUCER_NAME]: categoryReducer,
     [DESIGNATION_REDUCER_NAME]: designationReducer,
     [SKILL_REDUCER_NAME]: skillReducer,
+    [POST_REDUCER_NAME]: postReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

@@ -19,6 +19,7 @@ interface IPostProps {
   post?: IPost;
 }
 const Post: FC<IPostProps> = ({ post }) => {
+  console.log("p", post);
   return (
     <Box className="post">
       <PostUser

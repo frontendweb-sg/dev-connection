@@ -19,9 +19,6 @@ class SkillServices implements IServices<ISkill> {
   getAll(): Promise<AxiosResponse<ISkill[], any>> {
     return httpClient.get(APP_BASE_URL);
   }
-  getById(id: string): Promise<AxiosResponse<ISkill, any>> {
-    return httpClient.get(APP_BASE_URL);
-  }
   create(body: ISkill): Promise<AxiosResponse<ISkill, any>> {
     return httpClient.post(APP_BASE_URL, body);
   }

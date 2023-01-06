@@ -19,9 +19,7 @@ class DesignationServices implements IServices<IDesignation> {
   getAll(): Promise<AxiosResponse<IDesignation[], any>> {
     return httpClient.get(APP_BASE_URL);
   }
-  getById(id: string): Promise<AxiosResponse<IDesignation, any>> {
-    return httpClient.get(APP_BASE_URL);
-  }
+
   create(body: IDesignation): Promise<AxiosResponse<IDesignation, any>> {
     return httpClient.post(APP_BASE_URL, body);
   }

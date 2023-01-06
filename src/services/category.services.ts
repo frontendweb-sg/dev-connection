@@ -21,9 +21,7 @@ class CategoryServices implements IServices<ICategory> {
   getAll(): Promise<AxiosResponse<ICategory[], any>> {
     return httpClient.get(APP_BASE_URL);
   }
-  getById(id: string): Promise<AxiosResponse<ICategory, any>> {
-    return httpClient.get(APP_BASE_URL);
-  }
+
   create(body: ICategory): Promise<AxiosResponse<ICategory, any>> {
     return httpClient.post(APP_BASE_URL, body);
   }
