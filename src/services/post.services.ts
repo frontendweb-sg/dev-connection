@@ -34,6 +34,8 @@ interface IPost {
   likes?: ILike[] | null;
   comments?: IComment[] | null;
   active?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 class PostService implements IServices<IPost> {

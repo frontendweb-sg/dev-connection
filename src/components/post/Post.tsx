@@ -18,6 +18,7 @@ import Share from "./Share";
 interface IPostProps {
   post?: IPost;
 }
+const url = "";
 const Post: FC<IPostProps> = ({ post }) => {
   console.log("p", post);
   return (
@@ -27,18 +28,19 @@ const Post: FC<IPostProps> = ({ post }) => {
         designation="Sr. software engineer"
         className="mb-3"
       />
-      <PostImage />
+      <Typography variant="body1">{post?.description}</Typography>
+      <PostImage src={post?.image} />
 
       <Typography variant="subtitle2">
-        Posted on <DateTime />
+        Posted on <DateTime date={post?.createdAt} />
       </Typography>
       <Box className="d-flex aling-items-center">
-        <Like />
+        <Like data={post?.likes!} />
         <Share />
       </Box>
       <Comment />
 
-      <CommentList />
+      <CommentList comments={post?.comments!} />
     </Box>
   );
 };

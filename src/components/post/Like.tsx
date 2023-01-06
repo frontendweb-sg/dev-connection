@@ -1,4 +1,5 @@
-import { FC } from "react";
+import { FC, useMemo } from "react";
+import { ILike } from "../../services/post.services";
 import Box from "../Box";
 import Button from "../Button";
 
@@ -6,18 +7,19 @@ import Button from "../Button";
  *
  * @returns
  */
-interface ILikeProps {
-  like?: number;
-  dislike?: number;
-}
-const Like: FC<ILikeProps> = ({ like, dislike }) => {
+type LikeProps = {
+  data: ILike[];
+};
+const Like = ({ data }: LikeProps) => {
+  const like = data.filter((like: ILike) => like.like);
+  const dislikes = data.filter((like: ILike) => !like.like);
   return (
     <Box className="post-like">
       <Button variant="text" startIcon="heart">
-        0 Liked
+        {`${like.length} liked`}
       </Button>
       <Button variant="text" startIcon="heart">
-        {dislike} dislikes
+        {`${dislikes.length} disliked`}
       </Button>
     </Box>
   );

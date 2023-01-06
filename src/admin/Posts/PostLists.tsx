@@ -12,7 +12,7 @@ const PostLists = ({ posts }: PostListProps) => {
     <Row>
       {posts.map((post: IPost, index: number) => {
         return (
-          <Col key={post._id}>
+          <Col lg={4} md={4} key={post._id}>
             <Post post={post} />
           </Col>
         );
