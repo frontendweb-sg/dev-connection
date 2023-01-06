@@ -17,7 +17,7 @@ type ISelectProps<T> = React.SelectHTMLAttributes<HTMLSelectElement> &
     keyName?: string;
     errors?: object;
     touched?: object;
-    renderProps?: (item: T) => ReactNode;
+    getOptionLabel?: (item: T) => ReactNode;
     setFieldValue?: (name: string, value: string | number | object) => void;
     typographyProps?: TypographyProps;
   };
@@ -41,7 +41,7 @@ const Select = <T extends unknown>({
   startIcon,
   className,
   optionLabel,
-  renderProps,
+  getOptionLabel,
   setFieldValue,
   ...rest
 }: ISelectProps<T>) => {
@@ -72,16 +72,17 @@ const Select = <T extends unknown>({
     </Typography>
   );
 
-  const optionsEl = options.map((item: any) =>
-    renderProps ? (
-      <option key={item}>{renderProps(item)}</option>
-    ) : ["string", "number"].includes(typeof item) ? (
-      <option value={item} key={item}>
-        {item}
+  const optionsEl = options.map((item: any, index: number) =>
+    ["string", "number"].includes(typeof item) ? (
+      <option value={item} key={item + "-option-" + index}>
+        {getOptionLabel ? getOptionLabel(item) : item}
       </option>
     ) : (
-      <option key={item._id} value={JSON.stringify(item)}>
-        {keyName ? item[keyName] : item?.title}
+      <option
+        key={"option-" + JSON.stringify(item)}
+        value={JSON.stringify(item)}
+      >
+        {getOptionLabel ? getOptionLabel(item) : item?.label}
       </option>
     )
   );

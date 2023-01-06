@@ -72,7 +72,7 @@ const AddPost = () => {
               name="category"
               startIcon="home"
               options={[1, 2, 3, 4, 5, 6]}
-              renderProps={(value: number) => {
+              getOptionLabel={(value: number) => {
                 return value;
               }}
             />
@@ -81,7 +81,7 @@ const AddPost = () => {
               name="category"
               startIcon="home"
               options={["html", "css"]}
-              renderProps={(value: string) => {
+              getOptionLabel={(value: string) => {
                 return value;
               }}
             />
@@ -89,6 +89,7 @@ const AddPost = () => {
               name="category"
               options={categories}
               setFieldValue={setFieldValue}
+              getOptionLabel={(value) => value.title}
             />
             {/* <MonacoEditor value={values.description} /> */}
             <Textarea
