@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Box from "./Box";
 import PropTypes from "prop-types";
-import Typography, { ITypographyProps } from "./Typegraphy";
+import Typography, { TypographyProps } from "./Typegraphy";
 import classNames from "classnames";
 import { getError } from "../util";
 import { IconName } from "@fortawesome/free-solid-svg-icons";
@@ -10,7 +10,7 @@ import Icon from "./Icon";
 export interface IInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  labelProps?: ITypographyProps;
+  labelProps?: TypographyProps;
   startIcon?: IconName;
   endIcon?: IconName;
   errors?: object;

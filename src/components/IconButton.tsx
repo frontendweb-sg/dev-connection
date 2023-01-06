@@ -27,7 +27,11 @@ const IconButton = ({
   type,
   ...rest
 }: IconButtonProps) => {
-  const classes = classNames("btn btn-icon", className);
+  const classes = classNames(
+    "btn btn-icon",
+    { ["text-" + color]: color, ["btn-" + size]: size },
+    className
+  );
   return (
     <button type={type} className={classes} {...rest}>
       <Icon icon={icon!} />

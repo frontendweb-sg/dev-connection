@@ -3,7 +3,7 @@ import Button from "../../components/Button";
 import Modal, { ModalRef } from "../../components/Modal";
 
 import PageTitle from "../../components/PageTitle";
-import AddPost from "../../components/widget/AddPost";
+import AddPost from "../../components/AddPost";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { fetchPosts } from "../../store/actions/post.action";
 import { selectPost } from "../../store/reducers/post.reducer";
@@ -29,9 +29,8 @@ const Posts = () => {
 
       <PostLists posts={posts} />
 
-      <Modal ref={modalRef} label="Add Post">
-        <AddPost />
-      </Modal>
+      <AddPost />
+      <Modal ref={modalRef} label="Add Post"></Modal>
     </>
   );
 };

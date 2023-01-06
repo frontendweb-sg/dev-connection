@@ -2,6 +2,7 @@ import { AxiosResponse } from "axios";
 import { httpClient } from "../axios_instance";
 import { IServices } from "../types";
 import { Status } from "../util/Status";
+import { ICategory } from "./category.services";
 
 const APP_BASE_URL = "post";
 
@@ -24,7 +25,7 @@ interface IComment {
 
 interface IPost {
   _id?: string | number;
-  category: string;
+  category: ICategory | null;
   user: string;
   title: string;
   description: string;
@@ -42,7 +43,7 @@ class PostService implements IServices<IPost> {
   getObject() {
     return {
       _id: 0,
-      category: "html",
+      category: null,
       user: "",
       title: "",
       description: "",

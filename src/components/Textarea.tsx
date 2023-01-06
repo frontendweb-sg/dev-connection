@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { forwardRef } from "react";
 import { getError } from "../util";
 import Box from "./Box";
-import Typography, { ITypographyProps } from "./Typegraphy";
+import Typography, { TypographyProps } from "./Typegraphy";
 
 export type ITextareaProps =
   React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
@@ -13,7 +13,7 @@ export type ITextareaProps =
     errors?: object;
     touched?: object;
     label?: string;
-    labelProps?: ITypographyProps;
+    labelProps?: TypographyProps;
   };
 export type TextareaRef = HTMLTextAreaElement;
 
@@ -37,7 +37,7 @@ const Textarea = forwardRef<TextareaRef, ITextareaProps>(
     const error = getError(name!, errors!, touched!);
 
     const classes = classNames(
-      "form-textarea",
+      "form-control",
       {
         "is-valid": touched?.[name as keyof typeof touched],
         "is-invalid": error,

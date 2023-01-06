@@ -1,0 +1,12 @@
+.nav{
+  &-inline{
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .nav-item{
+      margin-right: 10px;
+    }   
+  }
+ 
+}

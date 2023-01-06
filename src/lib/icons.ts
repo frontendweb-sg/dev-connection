@@ -30,6 +30,7 @@ import {
   faVideo,
   faCalendar,
   faCode,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -61,5 +62,7 @@ library.add(
   faCamera,
   faVideo,
   faCalendar,
-  faCode
+  faCode,
+  faImage,
+  faTimes
 );

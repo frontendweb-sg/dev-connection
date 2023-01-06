@@ -1,7 +1,7 @@
 import Col from "../components/Col";
 import Post from "../components/post/Post";
 import Row from "../components/Row";
-import AddPost from "../components/widget/AddPost";
+import AddPost from "../components/AddPost";
 
 /**
  * User dashbaord
