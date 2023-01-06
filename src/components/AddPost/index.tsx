@@ -3,14 +3,13 @@ import { IPost, postService } from "../../services/post.services";
 import Form from "../Form";
 
 import Col from "../Col";
-import Typography from "../Typegraphy";
 import Box from "../Box";
 import Modal, { ModalRef } from "../Modal";
 import Row from "../Row";
 import Avatar from "../Avatar";
 import { memo, useEffect, useRef } from "react";
 import Textarea from "../Textarea";
-import Input from "../Input";
+
 import Select from "../Select";
 import Button from "../Button";
 import IconButton from "../IconButton";
@@ -19,7 +18,7 @@ import { useFocus } from "../../hooks/useFocus";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { fetchCategory } from "../../store/actions/category.action";
 import { selectCategory } from "../../store/reducers/category.reducer";
-import { PostStatus } from "../../util";
+import { PostStatus } from "../../util/data";
 
 /**
  * Add post component
@@ -75,6 +74,12 @@ const AddPost = () => {
               options={[1, 2, 3, 4, 5, 6]}
             />
             <Select
+              label="Hello world"
+              name="category"
+              startIcon="home"
+              options={["html", "css"]}
+            />
+            <Select
               name="category"
               options={categories}
               setFieldValue={setFieldValue}
@@ -127,7 +132,11 @@ const AddPost = () => {
                 </ul>
               </Col>
               <Col md={3}>
-                <Select options={PostStatus} />
+                <Select
+                  name="status"
+                  onChange={handleChange}
+                  options={["public", "custom", "only me", "friends"]}
+                />
               </Col>
               <Col md={3}>
                 <Button type="submit" block>

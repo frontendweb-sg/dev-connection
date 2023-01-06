@@ -5,11 +5,17 @@ const getError = (name: string, errors: object = {}, touched: object = {}) => {
     : null;
 };
 
-const PostStatus = [
-  { _id: 1, title: "Public" },
-  { _id: 2, title: "Custom" },
-  { _id: 3, title: "Friends" },
-  { _id: 4, title: "Only me" },
-];
+const isValidJson = (json: string) => {
+  let jsons = json;
+  try {
+    jsons = JSON.parse(jsons);
+  } catch (e) {
+    return false;
+  }
+  if (typeof jsons === "object" && jsons !== null) {
+    return true;
+  }
+  return false;
+};
 
-export { PostStatus, getError };
+export { isValidJson, getError };

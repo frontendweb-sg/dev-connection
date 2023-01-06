@@ -5,19 +5,25 @@ import { ReactNode } from "react";
 import { IconName } from "@fortawesome/fontawesome-svg-core";
 import Icon from "./Icon";
 import Typography, { TypographyProps } from "./Typegraphy";
-import { getError } from "../util";
+import { getError, isValidJson } from "../util";
 
-type ISelectProps<T> = React.SelectHTMLAttributes<HTMLSelectElement> & {
-  label?: string;
-  options: T[];
-  startIcon?: IconName;
-  endIcon?: IconName;
-  keyName?: string;
-  errors?: object;
-  touched?: object;
-  renderProps?: (item: T) => ReactNode;
-  setFieldValue?: (name: string, value: string | number | object) => void;
-  typographyProps?: TypographyProps;
+type ISelectProps<T> = React.SelectHTMLAttributes<HTMLSelectElement> &
+  typeof defaultProps & {
+    label?: string;
+    optionLabel?: string;
+    options: T[];
+    startIcon?: IconName;
+    endIcon?: IconName;
+    keyName?: string;
+    errors?: object;
+    touched?: object;
+    renderProps?: (item: T) => ReactNode;
+    setFieldValue?: (name: string, value: string | number | object) => void;
+    typographyProps?: TypographyProps;
+  };
+
+const defaultProps = {
+  optionLabel: "select item",
 };
 
 /**
@@ -27,33 +33,19 @@ type ISelectProps<T> = React.SelectHTMLAttributes<HTMLSelectElement> & {
  */
 const Select = <T extends unknown>({
   label,
+  errors,
   keyName,
   options,
-  startIcon,
   endIcon,
-  className,
-  errors,
   touched,
+  startIcon,
+  className,
+  optionLabel,
   renderProps,
   setFieldValue,
   ...rest
 }: ISelectProps<T>) => {
-  // handle change
-  const onHandleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-
-    const updatedValue = ["string", "number"].includes(typeof value)
-      ? value
-      : JSON.parse(value);
-
-    if (setFieldValue) {
-      setFieldValue?.(name, updatedValue);
-    } else {
-      rest.onChange?.(e);
-    }
-  };
-
-  const error = getError(rest.name!, errors, touched);
+  const error = getError(rest.name!, errors, touched); // error
   const classes = classNames(
     "form-control",
     {
@@ -61,32 +53,47 @@ const Select = <T extends unknown>({
       "is-invalid": error,
     },
     className
+  ); // class
+
+  // handle change
+  const onHandleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    const updatedValue = isValidJson(value) ? JSON.parse(value) : value;
+    if (setFieldValue) {
+      setFieldValue?.(name, updatedValue);
+    } else {
+      rest.onChange?.(e);
+    }
+  };
+
+  const labelEl = label && (
+    <Typography className="form-label" variant="label">
+      {label}
+    </Typography>
+  );
+
+  const optionsEl = options.map((item: any) =>
+    renderProps ? (
+      renderProps(item)
+    ) : ["string", "number"].includes(typeof item) ? (
+      <option value={item} key={item}>
+        {item}
+      </option>
+    ) : (
+      <option key={item._id} value={JSON.stringify(item)}>
+        {keyName ? item[keyName] : item?.title}
+      </option>
+    )
   );
 
   return (
     <Box className="mb-3">
-      {label && (
-        <Typography className="form-label" variant="label">
-          {label}{" "}
-        </Typography>
-      )}
+      {labelEl}
       <Box className={classes}>
         {startIcon && <Icon icon={startIcon} />}
         <select onChange={onHandleChange} {...rest}>
-          <option disabled>-- Select --</option>
-          {options.map((item: any) =>
-            renderProps ? (
-              renderProps(item)
-            ) : ["string", "number"].includes(typeof item) ? (
-              <option value={item} key={item}>
-                {item}
-              </option>
-            ) : (
-              <option key={item._id} value={JSON.stringify(item)} id={item._id}>
-                {keyName ? item[keyName] : item?.title}
-              </option>
-            )
-          )}
+          {optionLabel && <option disabled>{optionLabel}</option>}
+          {optionsEl}
         </select>
         {endIcon && <Icon icon={endIcon} />}
       </Box>
@@ -95,4 +102,5 @@ const Select = <T extends unknown>({
   );
 };
 
+Select.defaultProps = defaultProps;
 export default Select;
