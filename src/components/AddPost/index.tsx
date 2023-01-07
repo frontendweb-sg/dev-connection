@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import { IPost, postService } from "../../services/post.services";
+import { ICategory } from "../../services/category.services";
 import Form from "../Form";
 
 import Col from "../Col";
@@ -18,14 +19,20 @@ import { useFocus } from "../../hooks/useFocus";
 import { useAppDispatch, useAppSelector } from "../../hook";
 import { fetchCategory } from "../../store/actions/category.action";
 import { selectCategory } from "../../store/reducers/category.reducer";
-import { PostStatus } from "../../util/data";
-
+import * as yup from "yup";
 /**
  * Add post component
  * @returns
  */
 
-const AddPost = () => {
+const schema = yup.object().shape({
+  category: yup.object().required("Category is required"),
+});
+type AddPostProps = {
+  onClose?: () => void;
+};
+
+const AddPost = ({ onClose }: AddPostProps) => {
   const modelRef = useRef<ModalRef>(null);
   const modalImgRef = useRef<ModalRef>(null);
   const inpRef = useFocus<HTMLTextAreaElement>();
@@ -35,15 +42,21 @@ const AddPost = () => {
 
   const {
     values,
-    setValues,
+    errors,
+    isValid,
+    touched,
+    isSubmitting,
     handleBlur,
     handleChange,
     setFieldValue,
     handleSubmit,
   } = useFormik({
     initialValues: postService.getObject(),
-    onSubmit: (values: IPost) => {
+    validationSchema: schema,
+    onSubmit: (values: IPost, { setSubmitting, validateForm }) => {
       console.log("values", values);
+      setSubmitting(false);
+      onClose?.();
     },
   });
 
@@ -53,12 +66,9 @@ const AddPost = () => {
     }
   }, [dispatch, status]);
 
-  useEffect(() => {
-    setValues((prev) => ({ ...prev, category: categories[0] }));
-  }, [categories, setValues]);
-
   const image = values.image ? URL.createObjectURL(values.image as any) : "";
 
+  console.log(isValid, "isvalid");
   return (
     <Box className="post-add">
       <Form onSubmit={handleSubmit}>
@@ -67,26 +77,10 @@ const AddPost = () => {
             <Avatar size="sm" />
           </Col>
           <Col sm={10}>
-            <Select
-              label="Hello world"
+            <Select<ICategory>
               name="category"
-              startIcon="home"
-              options={[1, 2, 3, 4, 5, 6]}
-              getOptionLabel={(value: number) => {
-                return value;
-              }}
-            />
-            <Select
-              label="Hello world"
-              name="category"
-              startIcon="home"
-              options={["html", "css"]}
-              getOptionLabel={(value: string) => {
-                return value;
-              }}
-            />
-            <Select
-              name="category"
+              errors={errors}
+              touched={touched}
               options={categories}
               setFieldValue={setFieldValue}
               getOptionLabel={(value) => value.title}
@@ -146,7 +140,7 @@ const AddPost = () => {
                 />
               </Col>
               <Col md={3}>
-                <Button type="submit" block>
+                <Button loading={isSubmitting} type="submit" block>
                   Save
                 </Button>
               </Col>

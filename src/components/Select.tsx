@@ -10,11 +10,10 @@ import { getError, isValidJson } from "../util";
 type ISelectProps<T> = React.SelectHTMLAttributes<HTMLSelectElement> &
   typeof defaultProps & {
     label?: string;
-    optionLabel?: string;
+    placeholder?: string;
     options: T[];
     startIcon?: IconName;
     endIcon?: IconName;
-    keyName?: string;
     errors?: object;
     touched?: object;
     getOptionLabel?: (item: T) => ReactNode;
@@ -23,7 +22,7 @@ type ISelectProps<T> = React.SelectHTMLAttributes<HTMLSelectElement> &
   };
 
 const defaultProps = {
-  optionLabel: "select item",
+  placeholder: "Select item",
 };
 
 /**
@@ -34,13 +33,12 @@ const defaultProps = {
 const Select = <T extends unknown>({
   label,
   errors,
-  keyName,
   options,
   endIcon,
   touched,
   startIcon,
   className,
-  optionLabel,
+  placeholder,
   getOptionLabel,
   setFieldValue,
   ...rest
@@ -93,7 +91,7 @@ const Select = <T extends unknown>({
       <Box className={classes}>
         {startIcon && <Icon icon={startIcon} />}
         <select onChange={onHandleChange} {...rest}>
-          {optionLabel && <option disabled>{optionLabel}</option>}
+          <option value="">{placeholder}</option>
           {optionsEl}
         </select>
         {endIcon && <Icon icon={endIcon} />}

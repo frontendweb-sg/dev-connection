@@ -25,7 +25,6 @@ const Photo = forwardRef<PhotoRef, PhotoProps>((props, ref) => {
     inpRef: inpRef.current,
   }));
 
-  console.log(inpRef.current);
   return (
     <Box className={classes}>
       {isIcon && (

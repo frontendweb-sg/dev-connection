@@ -9,11 +9,17 @@ import { fetchPosts } from "../../store/actions/post.action";
 import { selectPost } from "../../store/reducers/post.reducer";
 import { AppContent } from "../../util/AppContent";
 import PostLists from "./PostLists";
+import Photo from "../../components/Photo";
+import Uploader from "../../components/Uploader";
 
 const Posts = () => {
   const modalRef = useRef<ModalRef>(null);
   const { posts, status } = useAppSelector(selectPost);
   const dispatch = useAppDispatch();
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.files);
+  };
 
   useEffect(() => {
     if (status === "idle") {
@@ -26,11 +32,11 @@ const Posts = () => {
       <PageTitle>
         <Button onClick={modalRef.current?.onOpen}>{AppContent.addText}</Button>
       </PageTitle>
-
+      <Uploader data-text="Upload images" onChange={onChange} />
       <PostLists posts={posts} />
-
-      <AddPost />
-      <Modal ref={modalRef} label="Add Post"></Modal>
+      <Modal ref={modalRef} label="Add Post">
+        <AddPost onClose={modalRef.current?.onClose!} />
+      </Modal>
     </>
   );
 };

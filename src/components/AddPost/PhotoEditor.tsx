@@ -4,6 +4,7 @@ import Button from "../Button";
 import IconButton from "../IconButton";
 import Photo, { PhotoRef } from "../Photo";
 import Typography from "../Typegraphy";
+import Uploader from "../Uploader";
 
 /**
  * Photo editor component
@@ -15,9 +16,9 @@ type PhotoEditorProps = {
   value?: string | File;
 };
 const PhotoEditor = ({ onChange, onClose, value }: PhotoEditorProps) => {
-  const [imgUrl, setImgUrl] = useState<string>("");
+  const [imgUrl, setImgUrl] = useState<string | string[]>("");
 
-  const inpRef = useRef<PhotoRef>(null);
+  //const inpRef = useRef<PhotoRef>(null);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files ?? [];
@@ -38,13 +39,12 @@ const PhotoEditor = ({ onChange, onClose, value }: PhotoEditorProps) => {
     onChange("image", "");
   };
 
-  console.log("v", value);
   const image = value ? URL.createObjectURL(value as any) : imgUrl;
   return (
     <Box>
       <Box>
         <Typography variant="subtitle1">Upload photo</Typography>
-        <Photo ref={inpRef} onChange={onChangeHandler}>
+        <Uploader dropzone data-text="Upload images" onChange={onChangeHandler}>
           {image && (
             <Box
               className="dropzone-img"
@@ -53,7 +53,18 @@ const PhotoEditor = ({ onChange, onClose, value }: PhotoEditorProps) => {
               <IconButton icon="times" onClick={onCancel} />
             </Box>
           )}
-        </Photo>
+        </Uploader>
+
+        {/* <Photo ref={inpRef} onChange={onChangeHandler}>
+          {image && (
+            <Box
+              className="dropzone-img"
+              style={{ backgroundImage: `url(${image})` }}
+            >
+              <IconButton icon="times" onClick={onCancel} />
+            </Box>
+          )}
+        </Photo> */}
       </Box>
       <Box className="mt-2 d-flex justify-content-end">
         <Button onClick={onClose}>Add photo</Button>

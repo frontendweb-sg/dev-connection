@@ -20,7 +20,6 @@ interface IPostProps {
 }
 const url = "";
 const Post: FC<IPostProps> = ({ post }) => {
-  console.log("p", post);
   return (
     <Box className="post">
       <PostUser
