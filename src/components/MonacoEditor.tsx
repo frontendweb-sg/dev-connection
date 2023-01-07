@@ -1,31 +1,36 @@
-import Editor, {
-  DiffEditor,
-  useMonaco,
-  loader,
-  type EditorProps,
-} from "@monaco-editor/react";
+import Editor, { type EditorProps } from "@monaco-editor/react";
 
 /**
  * Monaco editor
  * @returns
  */
 
-type MonacoEditorProps = EditorProps &
-  typeof defaultProps & {
-    value: string;
-  };
+export type MonacoEditorProps = EditorProps & typeof defaultProps & {};
 
 const defaultProps: EditorProps = {
   language: "css",
 };
 
-const MonacoEditor = ({ language, value }: MonacoEditorProps) => {
+const MonacoEditor = ({
+  language,
+  value,
+  onChange,
+  ...rest
+}: MonacoEditorProps) => {
+  const handleChange = (value: any, event: any) => {
+    onChange?.(value, event);
+  };
+
+  console.log(value);
   return (
     <Editor
       height="50vh"
       language={language}
       defaultLanguage={language}
+      onChange={handleChange}
       value={value}
+      options={{}}
+      {...rest}
     />
   );
 };

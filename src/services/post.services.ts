@@ -48,7 +48,7 @@ class PostService implements IServices<IPost> {
       title: "",
       description: "",
       image: "",
-      code: "",
+      code: "<html>\r\n<body>\r\n<h1>hello world</h1>\r\n</body>\r\n</html>",
       status: "public",
       likes: null,
       comments: null,

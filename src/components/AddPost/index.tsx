@@ -20,6 +20,7 @@ import { useAppDispatch, useAppSelector } from "../../hook";
 import { fetchCategory } from "../../store/actions/category.action";
 import { selectCategory } from "../../store/reducers/category.reducer";
 import * as yup from "yup";
+import CodeEditor from "./CodeEditor";
 /**
  * Add post component
  * @returns
@@ -34,6 +35,7 @@ type AddPostProps = {
 
 const AddPost = ({ onClose }: AddPostProps) => {
   const modelRef = useRef<ModalRef>(null);
+  const codeModalRef = useRef<ModalRef>(null);
   const modalImgRef = useRef<ModalRef>(null);
   const inpRef = useFocus<HTMLTextAreaElement>();
 
@@ -43,7 +45,6 @@ const AddPost = ({ onClose }: AddPostProps) => {
   const {
     values,
     errors,
-    isValid,
     touched,
     isSubmitting,
     handleBlur,
@@ -53,7 +54,7 @@ const AddPost = ({ onClose }: AddPostProps) => {
   } = useFormik({
     initialValues: postService.getObject(),
     validationSchema: schema,
-    onSubmit: (values: IPost, { setSubmitting, validateForm }) => {
+    onSubmit: (values: IPost, { setSubmitting }) => {
       console.log("values", values);
       setSubmitting(false);
       onClose?.();
@@ -67,8 +68,6 @@ const AddPost = ({ onClose }: AddPostProps) => {
   }, [dispatch, status]);
 
   const image = values.image ? URL.createObjectURL(values.image as any) : "";
-
-  console.log(isValid, "isvalid");
   return (
     <Box className="post-add">
       <Form onSubmit={handleSubmit}>
@@ -128,7 +127,11 @@ const AddPost = ({ onClose }: AddPostProps) => {
                     <IconButton icon="calendar" color="danger" />
                   </li>
                   <li className="nav-item">
-                    <IconButton icon="code" color="secondary" />
+                    <IconButton
+                      icon="code"
+                      onClick={codeModalRef.current?.onOpen}
+                      color="secondary"
+                    />
                   </li>
                 </ul>
               </Col>
@@ -154,6 +157,14 @@ const AddPost = ({ onClose }: AddPostProps) => {
           onClose={modalImgRef.current?.onClose!}
           onChange={setFieldValue}
           value={values.image}
+        />
+      </Modal>
+
+      <Modal label="Add code" ref={codeModalRef}>
+        <CodeEditor
+          onClose={modalImgRef.current?.onClose!}
+          onChange={(value: any) => setFieldValue("code", value)}
+          value={values.code}
         />
       </Modal>
     </Box>
