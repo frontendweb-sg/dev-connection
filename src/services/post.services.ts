@@ -26,12 +26,12 @@ interface IComment {
 interface IPost {
   _id?: string | number;
   category: ICategory | null;
-  user: string;
+  user?: string;
   title: string;
   description: string;
   image: string;
-  code?: string;
   status: IPostStatus;
+  code?: string;
   likes?: ILike[] | null;
   comments?: IComment[] | null;
   active?: boolean;
@@ -45,7 +45,7 @@ class PostService implements IServices<IPost> {
       _id: 0,
       category: null,
       user: "",
-      title: "",
+      title: "Hello world",
       description: "",
       image: "",
       code: "<html>\r\n<body>\r\n<h1>hello world</h1>\r\n</body>\r\n</html>",
@@ -64,7 +64,7 @@ class PostService implements IServices<IPost> {
     return httpClient.get(APP_BASE_URL + "/" + id);
   }
 
-  create(body: IPost): Promise<AxiosResponse<IPost, any>> {
+  create(body: IPost | FormData): Promise<AxiosResponse<IPost, any>> {
     return httpClient.post(APP_BASE_URL, body);
   }
 

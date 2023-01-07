@@ -9,7 +9,7 @@
 @import "./styles/layout/footer";
 @import "./styles/layout/sidebar";
 
-
+@import "./styles/components/tooltip";
 @import "./styles/components/loading";
 @import "./styles/components/modal";
 @import "./styles/components/nav";
@@ -21,9 +21,9 @@
 
 @import "./styles/components/page-title";
 
-@import "./styles/form/input"; 
-@import "./styles/form/dropzone"; 
+@import "./styles/form/input";
+@import "./styles/form/dropzone";
 @import "./styles/form/button";
 
 @import "./styles/pages/auth";
-@import "./styles/pages/landing"; 
+@import "./styles/pages/landing";

@@ -7,6 +7,7 @@ import {
 } from "../../services/post.services";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { alertShow } from "./alert.action";
+import { AppContent } from "../../util/AppContent";
 
 const CREATE_POST = "post/create";
 const UPDATE_POST = "post/update";
@@ -49,7 +50,21 @@ const addPost = createAsyncThunk(
   CREATE_POST,
   async (body: IPost, { dispatch }) => {
     try {
-      const { data } = await postService.create(body);
+      const fd = new FormData();
+      fd.append("title", body.title);
+      fd.append("description", body.description);
+      fd.append("category", JSON.stringify(body.category));
+      fd.append("code", body.code!);
+      fd.append("status", body.status);
+      fd.append("image", body.image);
+
+      const { data, status } = await postService.create(fd);
+
+      if (status === 201) {
+        dispatch(
+          alertShow({ message: AppContent.message.add, color: "success" })
+        );
+      }
       return data;
     } catch (error) {
       if (error instanceof Error)

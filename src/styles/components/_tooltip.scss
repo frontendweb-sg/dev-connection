@@ -1,0 +1,19 @@
+.tooltips {
+  position: relative;
+  display: block;
+  .tooltip {
+    border-radius: 4px;
+    background-color: $white;
+    box-shadow: 0 2px 2px $gray-100;
+    padding: 10px;
+    position: absolute;
+    opacity: 0;
+    bottom: 100%;
+    min-width: 100px;
+  }
+  &:hover {
+    .tooltip {
+      opacity: 1;
+    }
+  }
+}

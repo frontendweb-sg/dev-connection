@@ -8,7 +8,7 @@ import Editor, { type EditorProps } from "@monaco-editor/react";
 export type MonacoEditorProps = EditorProps & typeof defaultProps & {};
 
 const defaultProps: EditorProps = {
-  language: "css",
+  language: "html",
 };
 
 const MonacoEditor = ({
@@ -29,7 +29,11 @@ const MonacoEditor = ({
       defaultLanguage={language}
       onChange={handleChange}
       value={value}
-      options={{}}
+      options={{
+        formatOnType: true,
+        formatOnPaste: true,
+        ...rest.options,
+      }}
       {...rest}
     />
   );

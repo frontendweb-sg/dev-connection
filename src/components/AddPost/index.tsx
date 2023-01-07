@@ -21,6 +21,8 @@ import { fetchCategory } from "../../store/actions/category.action";
 import { selectCategory } from "../../store/reducers/category.reducer";
 import * as yup from "yup";
 import CodeEditor from "./CodeEditor";
+import Tooltip from "../Tooltip";
+import { addPost } from "../../store/actions/post.action";
 /**
  * Add post component
  * @returns
@@ -56,6 +58,10 @@ const AddPost = ({ onClose }: AddPostProps) => {
     validationSchema: schema,
     onSubmit: (values: IPost, { setSubmitting }) => {
       console.log("values", values);
+      if (values._id) {
+      } else {
+        dispatch(addPost(values));
+      }
       setSubmitting(false);
       onClose?.();
     },
@@ -127,11 +133,13 @@ const AddPost = ({ onClose }: AddPostProps) => {
                     <IconButton icon="calendar" color="danger" />
                   </li>
                   <li className="nav-item">
-                    <IconButton
-                      icon="code"
-                      onClick={codeModalRef.current?.onOpen}
-                      color="secondary"
-                    />
+                    <Tooltip title="Post code">
+                      <IconButton
+                        icon="code"
+                        onClick={codeModalRef.current?.onOpen}
+                        color="secondary"
+                      />
+                    </Tooltip>
                   </li>
                 </ul>
               </Col>
